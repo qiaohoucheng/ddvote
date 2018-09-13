@@ -1,0 +1,47 @@
+.layui-nav-child dd a{
+    padding-left:35px !important;
+}
+.layadmin-header {
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+.layui-card {
+    margin-bottom: 15px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+.layadmin-tabspage-none .layadmin-header .layui-breadcrumb {
+    border-top: 1px solid #f6f6f6;
+}
+.layadmin-header .layui-breadcrumb {
+    padding: 0 20px;
+}
+.layui-breadcrumb {
+    visibility: hidden;
+    font-size: 0;
+}
+.layui-fluid {
+    padding: 20px;
+}
+.layui-body{
+    background: #f8f8f9;
+}
+.layui-footer{
+    background-color: #fff !important;
+}
+.pull-right{
+    float: right;
+}
+.pull-left{
+    float: left;
+}
+.layui-layout-admin .layui-header {
+    background-color: #515a6e !important;
+}
+.layui-nav{
+    background-color: #fbfbfb !important;
+    color: #515a6e !important;
+}

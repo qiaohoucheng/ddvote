@@ -14,17 +14,14 @@
             </a>
             <dl class="layui-nav-child">
                 <dd {!! Request::is('design/type/1*') ? 'class="layui-this"' : '' !!} >
-                    <a href="/design/type/1">幼儿组</a>
-                </dd>
-                <dd {!! Request::is('design/type/2*') ? 'class="layui-this"' : '' !!}>
-                    <a href="/design/type/2">儿童组</a>
+                    <a href="/design/type/1">投票列表</a>
                 </dd>
                 <dd {!! Request::is('design/type/3*') ? 'class="layui-this"' : '' !!}>
-                    <a href="/design/type/3">少年组</a>
+                    <a href="/design/type/3">新建投票</a>
                 </dd>
             </dl>
         </li>
-        <li class="layui-nav-item layui-nav-itemed">
+        <li class="layui-nav-item ">
             <a class="" href="javascript:;">
                 <i class="layui-icon layui-icon-set"></i>
                 <cite>系统设置</cite>

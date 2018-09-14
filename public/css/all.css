@@ -27,7 +27,7 @@
     padding: 20px;
 }
 .layui-body{
-    background: #f8f8f9;
+    background: #f5f7f9;
 }
 .layui-footer{
     background-color: #fff !important;
@@ -42,6 +42,18 @@
     background-color: #515a6e !important;
 }
 .layui-nav{
-    background-color: #fbfbfb !important;
+    background-color: #515a6e !important;
     color: #515a6e !important;
+}
+.layui-layout-admin .layui-header .layui-nav {
+    background-color: #515a6e !important;
+}
+.layui-bg-black {
+    background-color: #515a6e!important;
+}
+.layui-nav-item .layui-icon {
+    margin-right: 5px;
+}
+.layui-nav-tree .layui-nav-child a {
+    margin-left: 7px;
 }

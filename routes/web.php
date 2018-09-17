@@ -16,5 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/home', 'HomeController@index')->name('home'); //概览
+    Route::resource('/theme', 'ThemeController');
+    Route::get('/theme/{id}/option','OptionController@index');
+    Route::get('/option/load','OptionController@load_data');
+    Route::get('excel/export','ExcelController@export');
+    Route::get('excel/import','ExcelController@import');
+});

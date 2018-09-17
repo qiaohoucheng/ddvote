@@ -22,7 +22,7 @@ class CreateOptionsTable extends Migration
             $table->string('option_mobile')->comment('选手手机号');
             $table->string('option_img')->comment('选手图片');
             $table->integer('option_vote')->comment('选手票数');
-            $table->tinyInteger('option_status')->default('1')->comment('状态 0未发布 1已发布');
+            $table->tinyInteger('status')->default('1')->comment('状态 0未发布 1已发布');
             $table->timestamps();
         });
     }

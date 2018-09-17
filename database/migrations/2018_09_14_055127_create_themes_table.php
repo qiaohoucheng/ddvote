@@ -20,7 +20,7 @@ class CreateThemesTable extends Migration
             $table->integer('end_time')->comment('活动结束时间');
             $table->text('theme_desc')->comment('活动简介');
             $table->integer('theme_vote')->comment('活动总票数');
-            $table->tinyInteger('theme_status')->default('0')->comment('状态 0未发布 1已发布');
+            $table->tinyInteger('status')->default('1')->comment('状态 0未发布 1已发布');
             $table->timestamps();
         });
     }

@@ -21,6 +21,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('/theme', 'ThemeController');
     Route::get('/theme/{id}/option','OptionController@index');
     Route::get('/option/load','OptionController@load_data');
-    Route::get('excel/export','ExcelController@export');
-    Route::get('excel/import','ExcelController@import');
+    Route::post('/excel/export','ExcelController@export');
+    Route::post('/excel/import','ExcelController@import');
 });

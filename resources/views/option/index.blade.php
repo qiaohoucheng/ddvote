@@ -12,9 +12,13 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-header">
-                            <h3>投票主题名称:<b>{{ $data->theme_name }}</b></h3>
+                            <div class="pull-left">
+                                投票主题名称:<b>{{ $data->theme_name }}</b>
+                            </div>
                             <div class="pull-right">
-                                <a href="{{ url('/theme/create') }}" class="layui-btn layui-btn-sm" >导入Excel</a>
+                                <button type="button" class="layui-btn layui-btn-sm" id="test1">
+                                    <i class="layui-icon">&#xe67c;</i>导入Excel
+                                </button>
                                 <a href="{{ url('/theme/create') }}" class="layui-btn layui-btn-sm" >新建选项</a>
                             </div>
                         </div>
@@ -70,11 +74,29 @@
             </div>
         </div>
         <script>
-            layui.use(['table','form','layer'], function(){
+            layui.use(['table','form','layer','upload'], function(){
                 var table = layui.table;
                 var form  = layui.form;
                 var layer = layui.layer;
+                var upload = layui.upload;
                 var token = '{{ csrf_token() }}';
+
+                //文件上传
+                var uploadInst = upload.render({
+                    elem: '#test1' //绑定元素
+                    ,url: '/excel/import'
+                    ,accept: 'file' //普通文件
+                    ,exts: 'xls|xlsx' //上传接口
+                    ,data:{'_token':token}
+                    ,done: function(res){
+                        console.log(res)
+                        //上传完毕回调
+                    }
+                    ,error: function(e){
+                        console.log(e);
+                        //请求异常回调
+                    }
+                });
 
                 //获取数据
                 table.render({

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Excel;
 
 class ExcelController extends Controller
 {
@@ -39,8 +40,11 @@ class ExcelController extends Controller
         //校验excel导入的数据
         $judge = $res[0];
         if( $judge[0]!='姓名' || $judge[1]!='证书编号' || $judge[2]!='类别' || $judge[3]!='专业' || $judge[4]!='年级组别' || $judge[5]!='测评结果'){
-            return redirect()->route('products.index')
-                ->with('error','请按照模板格式上传');
+            $array = array(
+                'code'=>1,
+                'message'=>'Excel数据不正确，请参考模板'
+            );
+            return $array;
         }
         //数据库注入数组
         unset($res[0]);
@@ -68,12 +72,6 @@ class ExcelController extends Controller
 
         $postData['final_id'] = Product::latest()->value('id');
 
-        //记录日志
-        $command = $this->module_name . '- 批量导入新数据';
-        $this->logRecord($command,json_encode($postData),$request->ip());
-
-        return redirect()->route('products.index')
-            ->with('success',"数据批量导入成功");
-
+        return $this->qhc('1','数据批量导入成功');
     }
 }

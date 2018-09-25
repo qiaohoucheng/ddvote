@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home'); //概览
     Route::resource('/theme', 'ThemeController');
     Route::get('/theme/{id}/option','OptionController@index');
+    Route::get('/theme/{id}/option/create','OptionController@create');
     Route::get('/option/load','OptionController@load_data');
     Route::post('/excel/export','ExcelController@export');
     Route::post('/excel/import','ExcelController@import');

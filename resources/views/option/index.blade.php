@@ -19,7 +19,7 @@
                                 <button type="button" class="layui-btn layui-btn-sm" id="test1">
                                     <i class="layui-icon">&#xe67c;</i>导入Excel
                                 </button>
-                                <a href="{{ url('/theme/create') }}" class="layui-btn layui-btn-sm" >新建选项</a>
+                                <a href="option/create" class="layui-btn layui-btn-sm" >新建选项</a>
                             </div>
                         </div>
                         <div class="layui-card-body">

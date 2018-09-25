@@ -17,4 +17,8 @@ class OptionController extends Controller
     public function load_data(Request $request){
         return $this->dataFormat(new Option(),$request);
     }
+    public function create($tid)
+    {
+        return view('option.create',compact('tid'));
+    }
 }

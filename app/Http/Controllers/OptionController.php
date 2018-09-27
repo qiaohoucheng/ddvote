@@ -9,9 +9,10 @@ use App\Model\Theme;
 class OptionController extends Controller
 {
     //主题信息加载
-    public function index($id){
+    public function index(Request $request,$id){
+        $keyword = $request->input('keyword')?$request->input('keyword'):'';
         $data = Theme::where('id',$id)->first();
-        return view('option.index',compact('id','data'));
+        return view('option.index',compact('id','data','keyword'));
     }
     //选项列表
     public function load_data(Request $request){

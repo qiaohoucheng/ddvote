@@ -13,11 +13,28 @@ class Controller extends BaseController
 
     public function dataFormat($model,$request)
     {
-        $page  = $request->get('page') ? $request->get('page') : 1;
-        $limit = $request->get('limit')? $request->get('limit') : 10;
+        //初始化
+        $page  = $request->input('page') ? $request->input('page') : 1;
+        $limit = $request->input('limit')? $request->input('limit') : 20;
+        $field = $request->input('field')? $request->input('field') :'id';
+        $order = $request->input('order')? $request->input('order') :'desc';
+        $keyword = $request->input('keyword')? $request->input('keyword') :'';
         $start = ($page-1) * $limit;
-        $data  = $model::offset($start)->limit($limit)->orderBy('id','desc')->get()->toArray();
-        $count = $model::count();
+        //判断是否有关键字
+        if(strlen($keyword) >0){
+            $data  = $model::where('option_code','like',$keyword.'%')
+                ->orwhere('option_company','like','%'.$keyword.'%')
+                ->orwhere('option_name','like','%'.$keyword.'%')
+                ->offset($start)->limit($limit)->orderBy($field,$order)->get()->toArray();
+            $count = $model::where('option_code','like',$keyword.'%')
+                ->orwhere('option_company','like','%'.$keyword.'%')
+                ->orwhere('option_name','like','%'.$keyword.'%')
+                ->count();
+        }else{
+            $data  = $model::offset($start)->limit($limit)->orderBy($field,$order)->get()->toArray();
+            $count = $model::count();
+        }
+
 
         $return = array(
             'code'=>0,

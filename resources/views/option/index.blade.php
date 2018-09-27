@@ -28,13 +28,14 @@
                                 <div class="demoTable">
                                     {{--（姓名/手机号/身份证号）--}}
                                     <div class="layui-inline">
-                                        <input class="layui-input" placeholder="选项名称" name="keyword" id="keyword" autocomplete="off" value="">
+                                        <input class="layui-input" placeholder="选项名称" name="keyword" id="keyword" autocomplete="off" value="{{  $keyword }}">
                                     </div>
                                     <button class="layui-btn" type="button" data-type="reload" id="search-btn">搜索</button>
+                                    <a class="layui-btn layui-btn-primary" type="button" href="/theme/{{$id}}/option">清空搜索条件</a>
                                 </div>
                             </form>
                             <!-- 表格 -->
-                            <table class="layui-table" id="DDTABLE" lay-filter="qrcode">
+                            <table class="layui-table" id="DDTABLE" lay-filter="optiontable">
                             </table>
                             <script type="text/html" id="hidebox">
                                 @{{#  if(d.is_hide == 1){ }}
@@ -59,9 +60,9 @@
                             </script>
                             <script type="text/html" id="sbox">
                                 @{{#  if(d.status == 1){ }}
-                                <span class="layui-badge layui-bg-green">已发布</span>
+                                <span class="layui-badge layui-bg-green">正常</span>
                                 @{{#  }else{ }}
-                                <span class="layui-badge layui-bg-orange">未发布</span>
+                                <span class="layui-badge layui-bg-orange">已锁定</span>
                                 @{{#  } }}
                             </script>
                             <script type="text/html" id="barDemo">
@@ -80,6 +81,8 @@
                 var layer = layui.layer;
                 var upload = layui.upload;
                 var token = '{{ csrf_token() }}';
+                var keyword = '{{ urlencode($keyword) }}';
+                var id ='{{ $id }}';
 
                 //文件上传
                 var uploadInst = upload.render({
@@ -102,13 +105,14 @@
                 table.render({
                     elem: '#DDTABLE',
                     page:{curr: location.hash.replace('#!page=', ''),hash:'page'},
-                    url:'/option/load',
+                    url:'/option/load?keyword='+keyword,
+                    limit: 20,
                     cols: [[
-                        {field:'id', width:60, fixed: true,title:'ID'}
-                        ,{field:'theme_name', width:200,title:'投票主题名称'}
-                        ,{field:'start_time',width:200,align:'center',title:'开始时间', templet:'#onebox'}
-                        ,{field:'end_time',width:200,align:'center',title:'结束时间', templet:'#twobox'}
-                        ,{field:'theme_vote', width:200,title:'总票数'}
+                        {field:'id', width:100, fixed: true,title:'ID',sort:true}
+                        ,{field:'option_name', width:200,title:'姓名'}
+                        ,{field:'option_code', width:200,title:'公司代码'}
+                        ,{field:'option_company', width:200,title:'公司名称'}
+                        ,{field:'option_vote', width:200,title:'投票数',sort:true}
                         ,{field:'status', width:150,title:'状态', templet:'#sbox'}
                         ,{fixed: 'right',  align:'center', toolbar: '#barDemo',title:'操作'}
                     ]],
@@ -116,7 +120,18 @@
 
                     }
                 });
-
+                table.on('sort(optiontable)',function(obj){
+                   console.log(obj.field);
+                   console.log(obj.type);
+                   console.log(this);
+                   table.reload('DDTABLE',{
+                       initSort:obj,
+                       where:{
+                           field:obj.field,
+                           order:obj.type
+                       }
+                   })
+                });
                 //监听select
                 form.on('select(status)', function(data){
                     window.location.href='/application/index?status='+data.value;
@@ -166,6 +181,22 @@
                             });
                         }
                         //layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                    }
+                });
+                //搜索
+                $('#search-btn').click(function(){
+                    var keyword = $('#keyword').val();
+                    if(keyword.length>0){
+                        window.location.href='/theme/'+id+'/option?keyword='+keyword;
+                    }
+                })
+                //回车绑定
+                $(document).keydown(function(event){
+                    if(event.keyCode==13){
+                        var keyword = $('#keyword').val();
+                        if(keyword.length>0){
+                            window.location.href='/theme/'+id+'/option?keyword='+keyword;
+                        }
                     }
                 });
             });

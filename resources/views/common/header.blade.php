@@ -1,4 +1,4 @@
-<div class="layui-logo">童画 奥利匹克</div>
+<div class="layui-logo">DD 投票系统</div>
 <!-- 头部区域（可配合layui已有的水平导航） -->
 <ul class="layui-nav layui-layout-left">
     {{--<li class="layui-nav-item"><a href="">控制台</a></li>--}}

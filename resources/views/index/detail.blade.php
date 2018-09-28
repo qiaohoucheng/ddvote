@@ -396,7 +396,7 @@
             async : false,
             success : function(data) {
                 wx.config({
-                    debug: false,
+                    debug: true,
                     appId: data.appId,
                     timestamp: data.timestamp,
                     nonceStr: data.nonceStr,
@@ -409,8 +409,8 @@
                 });
             },
             error: function(xhr, status, error) {
-                //alert(status);
-                //alert(xhr.responseText);
+                alert(status);
+                alert(xhr.responseText);
             }
         });
         wx.ready(function () {

@@ -22,21 +22,21 @@ class WechatController extends Controller
         $appid =  $this->appid;
         $secret = $this->secret;
         //获取token  7200
-        $accessToken = Cache::remember('accessToken', 120, function () use ($appid, $secret) {
+        //$accessToken = Cache::remember('accessToken', 120, function () use ($appid, $secret) {
             $accessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$secret";
             $accessTokenJson = file_get_contents($accessTokenUrl);
             $accessTokenObj = json_decode($accessTokenJson);
             $accessToken = $accessTokenObj->access_token;
-            return $accessToken;
-        });
+        //    return $accessToken;
+        //});
         //获取ticket
-        $jsapiTicket =  Cache::remember('accessToken', 120, function () use ($accessToken) {
+        //$jsapiTicket =  Cache::remember('accessToken', 120, function () use ($accessToken) {
             $ticketUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=$accessToken&type=jsapi";
             $jsapiTicketJson = file_get_contents($ticketUrl);
             $jsapiTicketObj = json_decode($jsapiTicketJson);
             $jsapiTicket = $jsapiTicketObj->ticket;
-            return $jsapiTicket;
-        });
+        //    return $jsapiTicket;
+        //});
 
         $noncestr = str_random(16);
         $time = time();

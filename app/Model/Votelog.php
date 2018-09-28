@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Model;
-
 use Illuminate\Database\Eloquent\Model;
 
-class Theme extends Model
+class Votelog extends Model
 {
-
+    protected $table = 'vote_log';
 }

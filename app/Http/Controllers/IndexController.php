@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Auth;
+
 use App\Model\Theme;
 use App\Model\Option;
+use App\Model\Votelog;
 
 class IndexController extends Controller
 {
@@ -31,11 +34,6 @@ class IndexController extends Controller
     {
         return $this->dataFormat(new Option(),$request);
     }
-    //搜索 有可能会合并到index
-    public function search()
-    {
-
-    }
     //详情
     public function show($id)
     {
@@ -44,9 +42,20 @@ class IndexController extends Controller
         return view('index.detail',compact('id','data','info'));
     }
     //投票
-    public function store()
+    public function store(Request $request)
     {
-
+        $option_id = $request->input('option_id');
+        $vid = $request->input('vid');
+        if($vid ==1 && $option_id >0){
+            echo 'now:'.strtotime(Carbon::now());
+            echo 'today:'.strtotime(Carbon::today());
+            echo 'tomorrow:'.strtotime(Carbon::tomorrow());
+            exit();
+        }else{
+            $return['code'] = 0;
+            $return['msg'] = '网错错误';
+        }
+        return $return;
     }
     //提交审核
     public function update()

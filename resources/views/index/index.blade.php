@@ -232,6 +232,7 @@
 <script>
     layui.use('layer', function(){
         var $ = layui.jquery, layer = layui.layer;
+        var token ='{{ csrf_token() }}';
         FastClick.attach(document.body);
         //搜索
         $('.search-btn').click(function(){
@@ -240,7 +241,8 @@
         //投票
         $('.list').on('click','.vote-btn',function(){
             var vid = $(this).data('vid');
-            $.post('/v1',{'vid':vid},function(data){
+            var option_id = $(this).data('pid');
+            $.post('/v1',{'vid':vid,'option_id':option_id,'_token':token},function(data){
                 layer.msg(data.msg);
             });
         });

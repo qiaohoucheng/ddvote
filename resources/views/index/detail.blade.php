@@ -286,7 +286,7 @@
         </div>
     </div>
     <div class="info-box">
-        <img src="{{asset('/images/info.jpg')}}">
+        <img src="/images/info.jpg">
     </div>
     <div class="text">
         <h3>投票须知：</h3>
@@ -306,7 +306,7 @@
 </form>
 </body>
 <div id="share" style="display:none;">
-    <img src="{{asset('/images/share-icon.png)}}" class="share-icon">
+    <img src="/images/share-icon.png" class="share-icon">
 </div>
 <script src="__JS__/fastclick.js"></script>
 <script src="/Public/Wap/layui.js"></script>

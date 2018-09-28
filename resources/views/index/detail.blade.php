@@ -383,20 +383,19 @@
         //提交上传图片
     })
 </script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 <script type="text/javascript">
     $(function(){
         var url = location.href.split('#').toString();
         $.ajax({
             type : "get",
-            url : "http://app.dudong.com/?app=wechat&controller=search&action=jssdk",
-            dataType : "jsonp",
-            jsonp : 'callback',
+            url : "/getconfig",
+            dataType : "json",
             data:{url:url},
             async : false,
             success : function(data) {
                 wx.config({
-                    debug: true,
+                    debug: false,
                     appId: data.appId,
                     timestamp: data.timestamp,
                     nonceStr: data.nonceStr,
@@ -409,8 +408,8 @@
                 });
             },
             error: function(xhr, status, error) {
-                alert(status);
-                alert(xhr.responseText);
+                //alert(status);
+                //alert(xhr.responseText);
             }
         });
         wx.ready(function () {

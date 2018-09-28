@@ -23,3 +23,4 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/excel/export','ExcelController@export');
     Route::post('/excel/import','ExcelController@import');
 });
+Route::get('/getconfig','WechatController@getconfig');

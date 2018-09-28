@@ -40,7 +40,8 @@ class IndexController extends Controller
     public function show($id)
     {
         $data = Option::find($id);
-        return view('index.detail',compact('id','data'));
+        $info = Theme::find($this->vid);
+        return view('index.detail',compact('id','data','info'));
     }
     //投票
     public function store()

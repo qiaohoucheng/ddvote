@@ -270,11 +270,11 @@
     <div class="head">
         <div class="top">
             <div class="top-default">
-                <img src="{$data['submit_photo']|get_pic_url}">
+                <img src="#">
             </div>
             <div class="top-info bar-tab">
-                <div class="tab-item name">姓名：<span>{$data.option_name}</span></div>
-                <div class="tab-item co">{$data.option_company}<span>{$data.option_code}</span></div>
+                <div class="tab-item name">姓名：<span>{{  $data.option_name }}</span></div>
+                <div class="tab-item co">{{  $data.option_company }}<span>{{  $data.option_code }}</span></div>
             </div>
         </div>
     </div>
@@ -290,7 +290,7 @@
     </div>
     <div class="text">
         <h3>投票须知：</h3>
-        <p>{$info.desc}</p>
+        <p>{{ $info.theme_desc }}</p>
     </div>
 </div>
 <form id="pic-form" action="{:U('index/submit_audit')}" method="post" >
@@ -306,7 +306,7 @@
 </form>
 </body>
 <div id="share" style="display:none;">
-    <img src="/Public/Wap/images/share-icon.png" class="share-icon">
+    <img src="/images/share-icon.png" class="share-icon">
 </div>
 <script src="__JS__/fastclick.js"></script>
 <script src="/Public/Wap/layui.js"></script>

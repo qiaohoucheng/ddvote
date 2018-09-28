@@ -34,6 +34,7 @@ class Controller extends BaseController
             $data  = $model::offset($start)->limit($limit)->orderBy($field,$order)->get()->toArray();
             $count = $model::count();
         }
+        $pages = ceil($count/$limit);
 
 
         $return = array(
@@ -41,6 +42,7 @@ class Controller extends BaseController
             'count'=>$count,
             'msg'=>'查询成功',
             'data'=>$data,
+            'pages'=>$pages,
         );
         return $return;
     }

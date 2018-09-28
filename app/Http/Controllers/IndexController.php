@@ -17,14 +17,19 @@ class IndexController extends Controller
     //首页
     public function index(Request $request)
     {
-        $keyword = $request->input('keyword') ? $request->input('keyword') :'';
-        $data = Theme::find($this->vid);
-        return view('index.index',compact('data','keyword'));
+        if($request->ajax()){
+            return $this->load_data($request);
+        }else{
+            $keyword = $request->input('keyword') ? $request->input('keyword') :'';
+            $data = Theme::find($this->vid);
+            return view('index.index',compact('data','keyword'));
+        }
+
     }
     //加载数据
-    public function load_data()
+    public function load_data($request)
     {
-
+        return $this->dataFormat(new Option(),$request);
     }
     //搜索 有可能会合并到index
     public function search()

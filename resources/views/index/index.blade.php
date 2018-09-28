@@ -9,6 +9,9 @@
     <meta name="format-detection" content="telephone=no">
     <!-- 引入样式 -->
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('/layui/css/layui.css') }}">
+    <script src="{{ asset('/layui/layui.js') }}"></script>
+    <script src="{{ asset('/js/jquery-2.2.3.min.js') }}"></script>
     <style type="text/css">
         html, body {
             height: 100%;
@@ -204,10 +207,10 @@
     </script>
 </head>
 <body>
-<!-- <div class="nav bar-tab">
-    <a href="" class="tab-item"></a>
-    <a href="" class="tab-item"></a>
-</div> -->
+{{--<div class="nav bar-tab">--}}
+    {{--<a href="" class="tab-item"></a>--}}
+    {{--<a href="" class="tab-item"></a>--}}
+{{--</div>--}}
 <div id="app">
     <div class="top-box">
         <a href="#">
@@ -216,32 +219,49 @@
     </div>
     <div class="search-box">
         <form action="/" method="get" id="search-form">
-            <input type="hidden" value="#" name="vid">
             <div class="search bar-tab">
                 <input type="search" value="{{ $keyword }}" autocomplete="off" name="keyword" class="search-input tab-item" placeholder="请输入姓名或公司代码搜索参投董秘">
                 <a href="javascript:;" class="search-btn tab-item"></a>
             </div>
         </form>
     </div>
-    <ul class="clear list">
-        <volist name="list" id="vo">
-            <li>
-                <div >
-                    <a href="/index/player/pid/1" class="list-top">
-                        <img src="/images/default.png">
-                    </a>
-                </div>
-                <div class="list-bot bar-tab">
-                    <div class="list-tit tab-item">
-                        <label>李雪琴<span class="ellipsis">世纪瑞尔</span></label>
-                    </div>
-                    <a href="javascript:;" data-pid="" data-vid="" class="tab-item vote-btn">
-                        <span></span>
-                    </a>
-                </div>
-            </li>
-        </volist>
+    <ul class="clear list" id="dd-content">
     </ul>
 </div>
+<script>
+    layui.use('flow', function(){
+        var $ = layui.jquery;
+        var flow = layui.flow;
+        var keyword ='{{ $keyword }}';
+        //flow.lazyimg();
+        flow.load({
+            elem: '#dd-content'
+            ,done: function(page, next){
+                console.log(page);
+                var lis = [];
+                $.get('/v1',{'page':page,'keyword':keyword}, function(res){
+                    //假设你的列表返回在data集合中
+                    layui.each(res.data, function(index, item){
+                        lis.push('<li>'+
+                            '<a  href="/v1/'+item.id+'"class="list-top">'+
+                            '<img lay-src="'+item.path+'">'+
+                            '</a>'+
+                            '<div class="list-bot bar-tab">'+
+                            '<div class="list-tit tab-item">'+
+                            '<label>'+item.option_name+'<span class="ellipsis">'+item.option_company+'</span></label>'+
+                            '</div>'+
+                            '<a href="javascript:;" data-pid="'+item.id+'" data-vid="'+item.theme_id+'"  class="tab-item vote-btn">'+
+                            '<span></span>'+
+                            '</a>'+
+                            '</div>'+
+                            '</li>')
+                    });
+                    next(lis.join(''), page < res.pages);
+                });
+
+            }
+        });
+    });
+</script>
 </body>
 </html>

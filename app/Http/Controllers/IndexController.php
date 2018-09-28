@@ -44,12 +44,21 @@ class IndexController extends Controller
     //投票
     public function store(Request $request)
     {
+        $mid = 1;
         $option_id = $request->input('option_id');
         $vid = $request->input('vid');
         if($vid ==1 && $option_id >0){
-            echo 'now:'.strtotime(Carbon::now());
-            echo 'today:'.strtotime(Carbon::today());
-            echo 'tomorrow:'.strtotime(Carbon::tomorrow());
+            //strtotime(Carbon::now());
+            $today = strtotime(Carbon::today());
+            $tomorrow = strtotime(Carbon::tomorrow());
+            $logid = Votelog::where('member_id',$mid)->where('theme_id',$vid)
+                ->where('option_id',$option_id)->where('created_at','>',$today)->value('id');
+            if(isset($logid) && $logid >0){
+                $return['code'] = 0;
+                $return['msg'] = '您今天已经投过票了';
+            }else{
+                
+            }
             exit();
         }else{
             $return['code'] = 0;

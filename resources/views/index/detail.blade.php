@@ -273,8 +273,8 @@
                 <img src="#">
             </div>
             <div class="top-info bar-tab">
-                <div class="tab-item name">姓名：<span>{{  $data.option_name }}</span></div>
-                <div class="tab-item co">{{  $data.option_company }}<span>{{  $data.option_code }}</span></div>
+                <div class="tab-item name">姓名：<span>{{  $data->option_name }}</span></div>
+                <div class="tab-item co">{{  $data->option_company }}<span>{{  $data->option_code }}</span></div>
             </div>
         </div>
     </div>
@@ -290,7 +290,7 @@
     </div>
     <div class="text">
         <h3>投票须知：</h3>
-        <p>{{ $info.theme_desc }}</p>
+        <p>{{ $info->theme_desc }}</p>
     </div>
 </div>
 <form id="pic-form" action="{:U('index/submit_audit')}" method="post" >

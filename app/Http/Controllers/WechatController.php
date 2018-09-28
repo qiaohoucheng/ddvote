@@ -22,7 +22,7 @@ class WechatController extends Controller
         $appid =  $this->appid;
         $secret = $this->secret;
         //获取token  7200
-        $accessToken = Cache::remember('accessToken', 120, function () use ($appid, $secret) {
+        $accessToken = Cache::remember('accessTokenv', 120, function () use ($appid, $secret) {
             $accessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$secret";
             $accessTokenJson = file_get_contents($accessTokenUrl);
             $accessTokenObj = json_decode($accessTokenJson);

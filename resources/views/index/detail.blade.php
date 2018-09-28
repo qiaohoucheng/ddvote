@@ -417,9 +417,9 @@
             var link = window.location.href;
             var protocol = window.location.protocol;
             var host = window.location.host;
-            var thumb ="{:get_pic_url($data['submit_photo'])}";
+            var thumb ="http://vote.dudong.com/images/default.png";
             wx.onMenuShareTimeline({
-                title: '{$data.user_name}',
+                title: '我是秦始皇,打钱',
                 link: link,
                 imgUrl: thumb,
                 success: function () {
@@ -428,7 +428,7 @@
                 }
             });
             wx.onMenuShareAppMessage({
-                title: '{$data.user_name}',
+                title: '我是秦始皇,打钱',
                 desc: '',
                 link: link,
                 imgUrl: thumb,

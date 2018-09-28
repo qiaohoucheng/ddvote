@@ -228,12 +228,28 @@
     <ul class="clear list" id="dd-content">
     </ul>
 </div>
+<script src="{{ asset('/js/fastclick.js') }}"></script>
 <script>
+    layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+        FastClick.attach(document.body);
+        //搜索
+        $('.search-btn').click(function(){
+            $('#search-form').submit();
+        })
+        //投票
+        $('.list').on('click','.vote-btn',function(){
+            var vid = $(this).data('vid');
+            $.post('/v1',{'vid':vid},function(data){
+                layer.msg(data.msg);
+            });
+        });
+    });
     layui.use('flow', function(){
         var $ = layui.jquery;
         var flow = layui.flow;
         var keyword ='{{ $keyword }}';
-        //flow.lazyimg();
+        flow.lazyimg();
         flow.load({
             elem: '#dd-content'
             ,done: function(page, next){
@@ -261,6 +277,66 @@
 
             }
         });
+    });
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var url = location.href.split('#').toString();
+        $.ajax({
+            type : "get",
+            url : "http://app.dudong.com/?app=wechat&controller=search&action=jssdk",
+            dataType : "jsonp",
+            jsonp : 'callback',
+            data:{url:url},
+            async : false,
+            success : function(data) {
+                wx.config({
+                    debug: false,
+                    appId: data.appId,
+                    timestamp: data.timestamp,
+                    nonceStr: data.nonceStr,
+                    signature: data.signature,
+                    jsApiList: [
+                        'checkJsApi',
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage'
+                    ]
+                });
+            },
+            error: function(xhr, status, error) {
+                //alert(status);
+                //alert(xhr.responseText);
+            }
+        });
+        wx.ready(function () {
+            var link = window.location.href;
+            var protocol = window.location.protocol;
+            var host = window.location.host;
+            var thumb ='http://vote.dudong.com/images/default.png';
+            wx.onMenuShareTimeline({
+                title: '{{ $data->theme_name }}',
+                link: link,
+                imgUrl: thumb,
+                success: function () {
+                },
+                cancel: function () {
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '{{ $data->theme_name }}',
+                desc: '',
+                link: link,
+                imgUrl: thumb,
+                type: 'link',
+                dataUrl: '',
+                success: function () {
+                },
+                cancel: function () {
+                }
+            });
+        });
+
     });
 </script>
 </body>

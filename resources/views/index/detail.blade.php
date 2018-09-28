@@ -8,8 +8,10 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <meta name="format-detection" content="telephone=no">
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="__CSS__/reset.css">
-    <link rel="stylesheet" href="__CSS__/layui.css">
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('/layui/css/layui.css') }}">
+    <script src="{{ asset('/layui/layui.js') }}"></script>
+    <script src="{{ asset('/js/jquery-2.2.3.min.js') }}"></script>
     <style type="text/css">
         html, body {
             height: 100%;
@@ -308,8 +310,7 @@
 <div id="share" style="display:none;">
     <img src="/images/share-icon.png" class="share-icon">
 </div>
-<script src="__JS__/fastclick.js"></script>
-<script src="/Public/Wap/layui.js"></script>
+<script src="{{ asset('/js/fastclick.js') }}"></script>
 <!-- <script src="lay/modules/mobile/upload-mobile.js"></script> -->
 <script>
     function showpop() {
@@ -359,7 +360,8 @@
 
     });
     layui.use('layer', function(){
-        var $ = layui.jquery, layer = layui.layer;
+        var $ = layui.jquery;
+        var layer = layui.layer;
         FastClick.attach(document.body);
         //投票
         $('.btn-group').on('click','.vote-btn',function(){

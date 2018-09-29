@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\URL;
 
 use Socialite;
 use SocialiteProviders\Weixin\Provider;
+use App\Model\Member;
+use Carbon\Carbon;
 
 class WechatController extends Controller
 {
@@ -62,10 +64,17 @@ class WechatController extends Controller
 
     public function handleProviderCallback(Request $request)
     {
+        $uid = seesion('dduid');
+        if($uid>0){
+            return redirect('/v1');
+        }
         $user_data = Socialite::with('weixin')->user();
-
-        var_dump($user_data);
+        $member = Member::firstOrCreate(['openid'=>$user_data->openid]);
+        $member->nickname = $user_data->nickname;
+        $member->photo = $user_data->avatar;
+        $member->created_at = strtotime(Carbon::now());
+        $res = $member->save();
+        var_dump($res);
         exit();
-        //todo whatever
     }
 }

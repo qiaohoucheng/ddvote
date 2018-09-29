@@ -77,8 +77,9 @@ class WechatController extends Controller
 //        if($res){
 //            session('dduid',$member->id);
 //        }
-        var_dump($user_data->openid);
-        var_dump($user_data->nickname);
-        var_dump($user_data->avatar);
+        var_dump($user_data);
+       // var_dump($user_data->openid);
+        //var_dump($user_data->nickname);
+       // var_dump($user_data->avatar);
     }
 }

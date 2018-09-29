@@ -69,13 +69,16 @@ class WechatController extends Controller
             return redirect('/v1');
         }
         $user_data = Socialite::with('weixin')->user();
-        $member = Member::firstorNew(['openid'=>$user_data->openid]);
-        $member->nickname = $user_data->nickname;
-        $member->photo = $user_data->avatar;
-        $member->created_at = strtotime(Carbon::now());
-        $res = $member->save();
-        if($res){
-            session('dduid',$member->id);
-        }
+//        $member = Member::firstorNew(['openid'=>$user_data->openid]);
+//        $member->nickname = $user_data->nickname;
+//        $member->photo = $user_data->avatar;
+//        $member->created_at = strtotime(Carbon::now());
+//        $res = $member->save();
+//        if($res){
+//            session('dduid',$member->id);
+//        }
+        var_dump($user_data->openid);
+        var_dump($user_data->nickname);
+        var_dump($user_data->avatar);
     }
 }

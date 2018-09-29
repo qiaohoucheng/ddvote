@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\URL;
 
+use Socialite;
+use SocialiteProviders\Weixin\Provider;
+
 class WechatController extends Controller
 {
     protected $appid;
@@ -50,5 +53,16 @@ class WechatController extends Controller
             "signature" => $signature
         );
         return $signPackage;
+    }
+
+    public function redirectToProvider(Request $request)
+    {
+        return Socialite::with('weixin')->redirect();
+    }
+
+    public function handleProviderCallback(Request $request)
+    {
+        $user_data = Socialite::with('weixin')->user();
+        //todo whatever
     }
 }

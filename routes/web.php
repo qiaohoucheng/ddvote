@@ -24,3 +24,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/excel/import','ExcelController@import');
 });
 Route::get('/getconfig','WechatController@getconfig');
+//weixin login
+Route::get('auth/weixin', 'WechatController@redirectToProvider');
+Route::get('auth/weixin/callback', 'WechatController@handleProviderCallback');

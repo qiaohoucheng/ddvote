@@ -63,6 +63,9 @@ class WechatController extends Controller
     public function handleProviderCallback(Request $request)
     {
         $user_data = Socialite::with('weixin')->user();
+
+        var_dump($user_data);
+        exit();
         //todo whatever
     }
 }

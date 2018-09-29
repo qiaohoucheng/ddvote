@@ -10,7 +10,6 @@ use Socialite;
 use SocialiteProviders\Weixin\Provider;
 use App\Model\Member;
 use Carbon\Carbon;
-use Illuminate\Contracts\Session\Session;
 
 class WechatController extends Controller
 {

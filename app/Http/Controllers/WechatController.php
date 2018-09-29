@@ -10,6 +10,7 @@ use Socialite;
 use SocialiteProviders\Weixin\Provider;
 use App\Model\Member;
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
 
 class WechatController extends Controller
 {
@@ -64,7 +65,7 @@ class WechatController extends Controller
 
     public function handleProviderCallback(Request $request)
     {
-        $uid = seesion('dduid');
+        $uid = session('dduid');
         if($uid>0){
             return redirect('/v1');
         }

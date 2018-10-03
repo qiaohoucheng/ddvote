@@ -66,7 +66,6 @@ class WechatController extends Controller
     {
         $uid = session('dduid');
         if(!$uid || $uid ==0){
-            echo $uid;
             $user_data = Socialite::with('weixin')->user();
             $user = $user_data->user;
             $member = Member::firstorNew(['openid'=>$user['openid']]);

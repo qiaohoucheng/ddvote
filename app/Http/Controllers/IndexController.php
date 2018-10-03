@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Auth;
+use Illuminate\Support\Facades\Session;
 
 use App\Model\Theme;
 use App\Model\Option;
@@ -16,6 +17,9 @@ class IndexController extends Controller
     public function __construct()
     {
         $this->vid = 1;
+        session('test',1);
+        $test = session('test');
+        var_dump($test);
     }
     //首页
     public function index(Request $request)

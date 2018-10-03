@@ -65,7 +65,7 @@ class WechatController extends Controller
     public function handleProviderCallback(Request $request)
     {
         $uid = session('dduid');
-        if(!$uid){
+        if(!$uid || $uid ==0){
             $user_data = Socialite::with('weixin')->user();
             $user = $user_data->user;
             $member = Member::firstorNew(['openid'=>$user['openid']]);

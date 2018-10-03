@@ -17,7 +17,7 @@ class CheckWeixin
     {
         $uid = session('dduid');
         $uid = 0;
-        if(!$uid){
+        if(!$uid || $uid == 0){
             redirect('/auth/weixin');
         }
         echo $uid;

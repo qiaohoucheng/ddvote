@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function() {
 });
 Route::get('/getconfig','WechatController@getconfig');
 //weixin login
-Route::resource('/file', 'FileController');
 Route::get('auth/weixin', 'WechatController@redirectToProvider');
 Route::get('auth/weixin/callback', 'WechatController@handleProviderCallback');
+//file
+Route::resource('/file', 'FileController');

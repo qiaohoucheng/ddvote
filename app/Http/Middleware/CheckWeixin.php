@@ -16,7 +16,9 @@ class CheckWeixin
     public function handle($request, Closure $next)
     {
         $uid = session('dduid');
+        echo 1;
         if(!$uid || $uid == 0){
+            echo 2;
             redirect('/auth/weixin');
         }
         var_dump('uid:'.$uid);

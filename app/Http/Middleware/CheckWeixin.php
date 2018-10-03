@@ -20,6 +20,7 @@ class CheckWeixin
             redirect('/auth/weixin');
         }
         var_dump('uid:'.$uid);
+        exit();
         return $next($request);
     }
 }

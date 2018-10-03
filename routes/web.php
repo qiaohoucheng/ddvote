@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->middleware('checkweixin');
 Route::resource('/v1','IndexController')->middleware('checkweixin');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {

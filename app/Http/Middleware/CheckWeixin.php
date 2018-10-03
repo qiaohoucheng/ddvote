@@ -19,6 +19,7 @@ class CheckWeixin
         if(!$uid){
             redirect('/auth/weixin');
         }
+        echo $uid;
         return $next($request);
     }
 }

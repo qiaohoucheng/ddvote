@@ -57,7 +57,7 @@ class IndexController extends Controller
                 $return['code'] = 0;
                 $return['msg'] = '您今天已经投过票了';
             }else{
-                
+
             }
             exit();
         }else{

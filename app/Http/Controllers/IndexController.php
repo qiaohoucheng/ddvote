@@ -20,6 +20,10 @@ class IndexController extends Controller
     //首页
     public function index(Request $request)
     {
+
+
+
+
         if($request->ajax()){
             return $this->load_data($request);
         }else{
@@ -39,6 +43,7 @@ class IndexController extends Controller
     {
         $data = Option::find($id);
         $info = Theme::find($this->vid);
+        $info['theme_desc'] = str_replace(array("\r\n", "\n", "\r"),"<br />", $info['theme_desc']);
         return view('index.detail',compact('id','data','info'));
     }
     //投票

@@ -18,14 +18,18 @@
         }
         body {
             line-height: 1.4;
-            background-color: #000;
+            background-color: #000103;
             font-family: '微软雅黑','PingFang SC','Droidsansfallback';
         }
         h1, h2, h3, h4, h5, h6 {
             line-height: 1.4;
         }
         #app {
-            background-color: #000;
+            background-color: #000103;
+            min-height: 100%;
+            background-image: url(/images/dongmi-bg.png);
+            background-repeat: no-repeat;
+            background-size: 100% auto;
         }
         .ellipsis {
             overflow: hidden;
@@ -73,42 +77,36 @@
             clear: both;
         }
 
-        .top-box {
-            display: block;
-            position: relative;
-        }
+
         .top-box img {
             width: 100%;
             vertical-align: top;
         }
-        .top-box .top-logo {
-            position: absolute;
-            width: 2.24rem;
-            left: 0.8rem;
-            top: 0.746rem;
-        }
+
         .search-box {
-            padding: 0.32rem;
+            padding: 0.533rem;
+            padding-top: 5.866rem;
         }
         .search {
-            background-image: url(/images/input-img.png);
+            background-image: url(/images/ic_vote2@2x.png);
             background-repeat: no-repeat;
-            height: 0.774rem;
-            background-size: 100%;
+            height: 0.96rem;
+            background-size: 100% 100%;
         }
         .search .search-input {
-            width: 7.013rem;
+            width: 6.693rem;
             border: none;
             height: 100%;
             text-align: left;
-            font-size: 0.346rem;
-            padding: 0.1rem 0.4rem;
+            font-size: 0.32rem;
+            padding: 0.1rem 0.533rem;
+            padding-right: 0.266rem;
             color: #666;
             background-color: transparent;
 
         }
         .search .search-btn {
-            width: 2.386rem;
+            width: 2.24rem;
             height: 100%;
             background-color: transparent;
             color: transparent;
@@ -118,19 +116,20 @@
             color: transparent;
         }
         ::-webkit-input-placeholder {
-            color: #bbb;
+            color: rgba(255,255,255,.5);
         }
         .list {
-            padding: 0.32rem;
+            padding: 0.533rem;
             padding-top: 0;
             padding-bottom: 1px;
         }
         .list li {
             display: block;
-            width: 4.52rem;
+            width: 4.266rem;
             border-radius: 0.16rem;
+            background-color: #141E3C;
             overflow: hidden;
-            margin-bottom: 0.32rem;
+            margin-bottom: 0.4rem;
         }
         .list li:nth-child(2n) {
             float: right;
@@ -139,71 +138,69 @@
             float: left;
         }
         .list-top {
-            height: 2.533rem;
+            height: 2.4rem;
             background-image: url(/images/default.png);
             background-repeat: no-repeat;
             background-size: 100%;
             overflow: hidden;
-            display: block;
+            position: relative;
         }
         .list-top img {
             width: 100%;
             vertical-align: top;
         }
+        .list-num {
+            position: absolute;
+            left: 0.266rem;
+            right: 0.266rem;
+            bottom: 0.16rem;
+            text-align: right;
+            font-size: 0.32rem;
+            color: #F0CA79;
+            -webkit-text-shadow: 0 0 4px rgba(0,0,0,0.50);
+            text-shadow: 0 0 4px rgba(0,0,0,0.50);
+        }
         .list-bot {
-            height: 1.266rem;
-            background-color: #fff;
+            height: 1.6rem;
+            background-color: #141E3C;
         }
         .list-bot .vote-btn {
-            padding-right: 0.32rem;
-            width: 1.573rem;
+            padding-right: 0.266rem;
+            width: 1.706rem;
         }
         .vote-btn span{
             display: block;
             margin-left: auto;
-            width: 1.253rem;
-            height: 0.48rem;
-            background-image: url('/images/votebtn.png');
+            width: 1.44rem;
+            height: 0.8rem;
+            background-image: url(/images/ic_vote@2x.png);
             background-repeat: no-repeat;
-            background-size: 100%;
+            background-size: 100% 100%;
         }
         .list-bot .list-tit {
-            color: #000;
-            font-size: 0.4rem;
+            color: #fff;
+            font-size: 0.426rem;
             width: 100%;
             padding-left: 0.32rem;
             text-align: left;
         }
         .list-tit span {
-            font-size: 0.266rem;
-            color: #bbb;
-            margin-left: 0.064rem;
-
-            display: inline-block;
-            -webkit-transform: scale(0.83);
-            transform: scale(0.83);
+            font-size: 0.32rem;
+            color: #fff;
+            opacity: 0.5;
+            display: block;
             vertical-align: middle;
         }
-        .nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 998;
-            height: 1.2rem;
-            background-image: url('/images/navbtn.jpg');
-            background-repeat: no-repeat;
-            background-size: 100%;
-            overflow: hidden;
-            background-color: #ffc969;
-        }
-        .nav~#app {
-            padding-bottom: 1.2rem;
-        }
+
     </style>
     <script>
-        var w = document.documentElement.clientWidth / 10;
-        document.getElementsByTagName('html')[0].style['font-size'] = w + 'px';
+        var mql = window.matchMedia("(orientation: portrait)");
+        function onMatchMeidaChange(mql){
+            var w = document.documentElement.clientWidth / 10;
+            document.getElementsByTagName('html')[0].style['font-size'] = w + 'px';
+        }
+        onMatchMeidaChange(mql);
+        mql.addListener(onMatchMeidaChange);
     </script>
 </head>
 <body>
@@ -212,19 +209,15 @@
     {{--<a href="" class="tab-item"></a>--}}
 {{--</div>--}}
 <div id="app">
-    <div class="top-box">
-        <a href="#">
-            <img src="/images/topbg.jpg" data ="/topbg.jpg">
-        </a>
-    </div>
     <div class="search-box">
         <form action="/" method="get" id="search-form">
-            <div class="search bar-tab">
-                <input type="search" value="{{ $keyword }}" autocomplete="off" name="keyword" class="search-input tab-item" placeholder="请输入姓名或公司代码搜索参投董秘">
-                <a href="javascript:;" class="search-btn tab-item"></a>
-            </div>
+        <div class="search bar-tab">
+            <input type="search" value="{{ $keyword }}" class="search-input tab-item" name="keyword" placeholder="请输入姓名或公司代码搜索参投董秘嘉宾">
+            <a href="javascript:;" class="search-btn tab-item"></a>
+        </div>
         </form>
     </div>
+    <p style="color:#fff;">当前用户:{{ Session::get('dd_uid') }}</p>
     <ul class="clear list" id="dd-content">
     </ul>
 </div>
@@ -260,19 +253,24 @@
                 $.get('/v1',{'page':page,'keyword':keyword}, function(res){
                     //假设你的列表返回在data集合中
                     layui.each(res.data, function(index, item){
-                        lis.push('<li>'+
-                            '<a  href="/v1/'+item.id+'"class="list-top">'+
+                        lis.push(
+                        '<li>'+
+                            '<a href=/v1/'+item.id+'>'+
+                            '<div class="list-top">'+
                             '<img lay-src="'+item.path+'">'+
-                            '</a>'+
-                            '<div class="list-bot bar-tab">'+
+                            '<div class="list-num">'+item.option_vote+'票</div>'+
+                            '</div>'+
+                               '</a>'+
+                        '<div class="list-bot bar-tab">'+
                             '<div class="list-tit tab-item">'+
                             '<label>'+item.option_name+'<span class="ellipsis">'+item.option_company+'</span></label>'+
-                            '</div>'+
-                            '<a href="javascript:;" data-pid="'+item.id+'" data-vid="'+item.theme_id+'"  class="tab-item vote-btn">'+
+                        '</div>'+
+                        '<a href="javascript:;" class="tab-item vote-btn">'+
                             '<span></span>'+
                             '</a>'+
                             '</div>'+
-                            '</li>')
+                        '</li>'
+                        )
                     });
                     next(lis.join(''), page < res.pages);
                 });

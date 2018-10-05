@@ -454,11 +454,12 @@
     layui.use('upload', function(){
         var $ = layui.jquery
             ,upload = layui.upload;
-
+        var token = '{{ csrf_token() }}';
         upload.render({
             elem: '#up'
             ,url: '/file/uploadPicture/'
             ,size: 4000 //限制文件大小，单位 KB
+            ,data:{'_token':token}
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
                 // obj.preview(function(index, file, result){

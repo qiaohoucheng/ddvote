@@ -9,6 +9,7 @@ use Auth;
 use App\Model\Theme;
 use App\Model\Option;
 use App\Model\Votelog;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
@@ -20,10 +21,6 @@ class IndexController extends Controller
     //首页
     public function index(Request $request)
     {
-
-
-
-
         if($request->ajax()){
             return $this->load_data($request);
         }else{
@@ -31,7 +28,6 @@ class IndexController extends Controller
             $data = Theme::find($this->vid);
             return view('index.index',compact('data','keyword'));
         }
-
     }
     //加载数据
     public function load_data($request)
@@ -72,8 +68,33 @@ class IndexController extends Controller
         return $return;
     }
     //提交审核
-    public function update()
+    public function update(Request $request)
     {
-
+        $rules = [
+            'submit_name'=>'required',
+            'mobile' => 'required',
+            'url' => 'required',
+        ];
+        $message = [
+            'submit_name.required' => '请添加姓名',
+            'mobile.required' => '请添加手机号',
+            'url.required' => '请添加图片',
+        ];
+        $validator = Validator::make($request->input(), $rules, $message);
+        if ($validator->fails()){
+            return $this->qhc(0,'缺少参数');
+        }else{
+            $data['name'] = $request->input('submit_name');
+            $data['mobile'] = $request->input('mobile');
+            $data['url'] = $request->input('url');
+            $data['created_at'] = strtotime(Carbon::now());
+            $data['member_id'] = $this->uid ? $this->uid :0;
+            $id = DB::table('audit')->insertGetId($data);
+            if($id >0){
+                return $this->qhc(1,'提交成功！请等待审核');
+            }else{
+                return $this->qhc(0,'提交失败！');
+            }
+        }
     }
 }

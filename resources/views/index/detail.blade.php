@@ -320,6 +320,17 @@
             font-size: 0.32rem;
             color: rgba(0,0,0,.5);
         }
+        .img-box {
+            width: 100%;
+            height: 2.666rem;
+            background-color: #F5F5F5;
+            border-radius: 0.213rem;
+            overflow: hidden;
+        }
+        .img-box img {
+            width: 100%;
+            vertical-align: top;
+        }
     </style>
     <script>
         var mql = window.matchMedia("(orientation: portrait)");
@@ -422,6 +433,8 @@
         <input type="text" class="pop-input" placeholder="姓名（必填）">
         <input type="text" class="pop-input" placeholder="联系方式（必填）">
         <button type="button" class="layui-btn u-btn" id="up">点击上传图片</button>
+        <div class="img-box" style="display: none;">
+        </div>
         <p class="pop-text">照片上传注意事项：<br>
             ·为确保上传照片真实性，请预留联系方式<br>
             ·经会务人员确认并审核后、方可显示在投票页面</p>
@@ -462,13 +475,16 @@
             ,data:{'_token':token}
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
-                // obj.preview(function(index, file, result){
-                //   $('#demo2').attr('src', result); //图片链接（base64）
-                // });
+                 obj.preview(function(index, file, result){
+                     $('#up').hide();
+                     $('.img-box').show();
+                     $('.img-box').html('<img src="'+result+'">');
+                   //$('.img-box').attr('src', result); //图片链接（base64）
+                 });
             }
             ,done: function(res){
-                if(res.status > 0){
-                    $('#submit-photo').val(res.file.id);
+                if(res.code == 1){
+                    $('#submit-photo').val(res.data.pic_id);
                     return layer.msg('上传成功');
                 }else{
                     return layer.msg('上传失败');

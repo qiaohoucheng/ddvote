@@ -260,11 +260,11 @@
                             '<img lay-src="'+item.path+'">'+
                             '<div class="list-num">'+item.option_vote+'票</div>'+
                             '</div>'+
-                               '</a>'+
+                            '</a>'+
                         '<div class="list-bot bar-tab">'+
-                            '<div class="list-tit tab-item">'+
+                            '<a href=/v1/'+item.id+' class="list-tit tab-item">'+
                             '<label>'+item.option_name+'<span class="ellipsis">'+item.option_company+'</span></label>'+
-                        '</div>'+
+                            '</a>'+
                         '<a href="javascript:;" class="tab-item vote-btn">'+
                             '<span></span>'+
                             '</a>'+

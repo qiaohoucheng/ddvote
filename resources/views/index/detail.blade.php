@@ -373,7 +373,7 @@
     <div class="btn-wrap">
         <div class="btn-group bar-tab">
             <a href="javascript:showpop()" class="tab-item"></a>
-            <a href="javascript:;" data-pid="{$data.id}" data-vid="{$info['id']}" class="tab-item vote-btn"></a>
+            <a href="javascript:;"  data-optionid="{{ $data->id }}" class="tab-item vote-btn"></a>
             <a href="javascript:showshare()" class="tab-item"></a>
         </div>
     </div>
@@ -501,14 +501,14 @@
     layui.use('layer', function(){
         var $ = layui.jquery;
         var layer = layui.layer;
+        var token ='{{ csrf_token() }}';
         FastClick.attach(document.body);
         //投票
         $('.btn-group').on('click','.vote-btn',function(){
-            var pid = $(this).data('pid');
-            var vid = $(this).data('vid');
-            $.post('/index/toupiao',{'pid':pid,'vid':vid},function(data){
-                layer.msg(data.msg);
-            })
+            var option_id = $(this).data('optionid');
+            $.post('/v1',{'option_id':option_id,'_token':token},function(data){
+                layer.msg(data.message);
+            });
 
         });
         $('.pop-btn').click(function(){

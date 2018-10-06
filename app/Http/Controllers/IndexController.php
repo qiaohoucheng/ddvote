@@ -45,27 +45,67 @@ class IndexController extends Controller
     //投票
     public function store(Request $request)
     {
-        $mid = 1;
+        $this->uid = 1;
+        $mid = $this->uid?$this->uid:0;
         $option_id = $request->input('option_id');
-        $vid = $request->input('vid');
-        if($vid ==1 && $option_id >0){
-            //strtotime(Carbon::now());
-            $today = strtotime(Carbon::today());
-            $tomorrow = strtotime(Carbon::tomorrow());
-            $logid = Votelog::where('member_id',$mid)->where('theme_id',$vid)
-                ->where('option_id',$option_id)->where('created_at','>',$today)->value('id');
-            if(isset($logid) && $logid >0){
-                $return['code'] = 0;
-                $return['msg'] = '您今天已经投过票了';
+        $vid = $this->vid;
+        $theme = Theme::find($vid);
+        $now_time = strtotime(Carbon::now());
+        if( $now_time - $theme->end_time > 0 ){
+            $this->qhc('40001','投票已截止');
+        }
+        $today  = strtotime(Carbon::today());
+        $tomorrow = strtotime(Carbon::tomorrow());
+        //判断是否投过票
+        $has_arr = Votelog::where('theme_id',$vid)
+            ->where('member_id',$mid)
+            ->where('created_at','>=',$today)
+            ->where('created_at','<=',$tomorrow)
+            ->select('option_id')->get();
+        if(!$has_arr){
+            $msg = '投票成功 剩余可投票次数4次';
+        }else{
+            foreach ($has_arr as $key=>$item){
+                $vote_arr[] = $item->option_id;
+            }
+            if(in_array($option_id,$vote_arr)){
+                return $this->qhc('40003','Sorry 一个人只能投一票哦');
             }else{
+                $num = count($vote_arr);
+                switch($num){
+                    case 1:
+                        $msg ='投票成功 剩余可投票次数3次';
+                        break;
+                    case 2:
+                        $msg ='投票成功 剩余可投票次数2次';
+                        break;
+                    case 3:
+                        $msg ='投票成功 剩余可投票次数1次';
+                        break;
+                    case 4:
+                        $msg ='投票成功! 投票次数已用完';
+                        break;
+                    case 5:
+                    default:
+                        return  $this->qhc('40001','Sorry 您今日投票次数已用完');
+                        break;
+
+                }
 
             }
-            exit();
-        }else{
-            $return['code'] = 0;
-            $return['msg'] = '网错错误';
         }
-        return $return;
+        $votelog = new Votelog();
+        $votelog->member_id = $mid;
+        $votelog->theme_id = $this->vid;
+        $votelog->option_id = $option_id;
+        $votelog->created_at = time();
+        $res = $votelog->save();
+        //投票
+        if($res !== false ){
+            Option::where('id',$option_id)->increment('option_vote');
+            return $this->qhc('1',$msg);
+        }
+        return $this->qhc('0','网络异常');
     }
     //提交审核
     public function update(Request $request)

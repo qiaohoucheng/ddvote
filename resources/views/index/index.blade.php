@@ -233,10 +233,9 @@
         })
         //投票
         $('.list').on('click','.vote-btn',function(){
-            var vid = $(this).data('vid');
-            var option_id = $(this).data('pid');
-            $.post('/v1',{'vid':vid,'option_id':option_id,'_token':token},function(data){
-                layer.msg(data.msg);
+            var option_id = $(this).data('optionid');
+            $.post('/v1',{'option_id':option_id,'_token':token},function(data){
+                layer.msg(data.message);
             });
         });
     });
@@ -265,7 +264,7 @@
                             '<a href=/v1/'+item.id+' class="list-tit tab-item">'+
                             '<label>'+item.option_name+'<span class="ellipsis">'+item.option_company+'</span></label>'+
                             '</a>'+
-                        '<a href="javascript:;" class="tab-item vote-btn">'+
+                        '<a href="javascript:;" data-optionid="'+item.id+'" class="tab-item vote-btn">'+
                             '<span></span>'+
                             '</a>'+
                             '</div>'+

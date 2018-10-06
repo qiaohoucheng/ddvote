@@ -16,7 +16,7 @@ class Controller extends BaseController
         //初始化
         $page  = $request->input('page') ? $request->input('page') : 1;
         $limit = $request->input('limit')? $request->input('limit') : 20;
-        $field = $request->input('field')? $request->input('field') :'id';
+        $field = $request->input('field')? $request->input('field') :'option_vote';
         $order = $request->input('order')? $request->input('order') :'desc';
         $keyword = $request->input('keyword')? $request->input('keyword') :'';
         $start = ($page-1) * $limit;

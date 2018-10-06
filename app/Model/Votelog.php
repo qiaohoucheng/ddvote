@@ -6,4 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 class Votelog extends Model
 {
     protected $table = 'vote_log';
+    public $timestamps = false;
 }

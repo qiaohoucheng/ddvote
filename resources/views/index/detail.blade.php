@@ -427,18 +427,22 @@
     </div>
 </div>
 <form id="pic-form" action="" method="post" >
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="option_id" value="{{ $data->id }}">
+    <input type="hidden" name="pic_id" id="submit-photo" >
+    <input type="hidden" name="_method" value="put">
     <a href="javascript:hidepop()" class="mask" id="mask" style="display: none"></a>
     <div class="pop-box" id="pop" style="display: none">
         <div class="pop-tit">图片上传</div>
-        <input type="text" class="pop-input" placeholder="姓名（必填）">
-        <input type="text" class="pop-input" placeholder="联系方式（必填）">
+        <input type="text" name="submit_name"  class="pop-input" placeholder="姓名（必填）">
+        <input type="text" name="mobile" class="pop-input" placeholder="联系方式（必填）">
         <button type="button" class="layui-btn u-btn" id="up">点击上传图片</button>
         <div class="img-box" style="display: none;">
         </div>
         <p class="pop-text">照片上传注意事项：<br>
             ·为确保上传照片真实性，请预留联系方式<br>
             ·经会务人员确认并审核后、方可显示在投票页面</p>
-        <a href="" class="pop-btn"></a>
+        <a href="javascript:;" class="pop-btn"></a>
     </div>
 </form>
 </body>
@@ -479,7 +483,6 @@
                      $('#up').hide();
                      $('.img-box').show();
                      $('.img-box').html('<img src="'+result+'">');
-                   //$('.img-box').attr('src', result); //图片链接（base64）
                  });
             }
             ,done: function(res){
@@ -512,11 +515,11 @@
 
         });
         $('.pop-btn').click(function(){
-            $.post('/index/submit_audit',$('#pic-form').serialize(),function(data){
-                if(data.code =='200'){
+            $.post('/v1/update',$('#pic-form').serialize(),function(data){
+                if(data.code =='1'){
                     hidepop();
                 }
-                layer.msg(data.msg);
+                layer.msg(data.message);
             })
         })
         //提交上传图片

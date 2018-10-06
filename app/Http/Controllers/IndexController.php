@@ -10,6 +10,7 @@ use App\Model\Theme;
 use App\Model\Option;
 use App\Model\Votelog;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class IndexController extends Controller
 {
@@ -110,15 +111,16 @@ class IndexController extends Controller
     //提交审核
     public function update(Request $request)
     {
+        $this->uid = 1;
         $rules = [
             'submit_name'=>'required',
             'mobile' => 'required',
-            'url' => 'required',
+            'pic_id' => 'required',
         ];
         $message = [
             'submit_name.required' => '请添加姓名',
             'mobile.required' => '请添加手机号',
-            'url.required' => '请添加图片',
+            'pic_id.required' => '请添加图片',
         ];
         $validator = Validator::make($request->input(), $rules, $message);
         if ($validator->fails()){
@@ -126,9 +128,10 @@ class IndexController extends Controller
         }else{
             $data['name'] = $request->input('submit_name');
             $data['mobile'] = $request->input('mobile');
-            $data['url'] = $request->input('url');
+            $data['photo'] = $request->input('pic_id');
             $data['created_at'] = strtotime(Carbon::now());
             $data['member_id'] = $this->uid ? $this->uid :0;
+            $data['option_id'] = $request->input('option_id');
             $id = DB::table('audit')->insertGetId($data);
             if($id >0){
                 return $this->qhc(1,'提交成功！请等待审核');

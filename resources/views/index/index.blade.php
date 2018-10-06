@@ -103,7 +103,7 @@
             padding-right: 0.266rem;
             color: #666;
             background-color: transparent;
-
+            width: 100%;
         }
         .search .search-btn {
             width: 2.24rem;

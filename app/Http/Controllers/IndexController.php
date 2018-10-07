@@ -16,10 +16,10 @@ class IndexController extends Controller
 {
     protected  $vid;
     protected  $uid;
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->vid = 1;
-        $this->uid = $request->session()->get('dd_uid');
+        $this->uid = session('dd_uid');
         if(!$this->uid && $this->uid ==0){
             return redirect('/auth/weixin');
         }

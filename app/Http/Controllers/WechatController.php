@@ -64,7 +64,7 @@ class WechatController extends Controller
 
     public function handleProviderCallback(Request $request)
     {
-        $uid = $request->session()->get('dd_uid');
+        $uid = session('dd_uid');
         if(!$uid || $uid == 0 ){
             $user_data = Socialite::with('weixin')->user();
             $user = $user_data->user;
@@ -74,7 +74,7 @@ class WechatController extends Controller
             $member->created_at = strtotime(Carbon::now());
             $res = $member->save();
             if($res){
-                $request->session()->put('dd_uid',$member->id);
+                session('dd_uid',$member->id);
             }
         }
         return redirect('/v1');

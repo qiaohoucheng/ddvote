@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'IndexController@index')->middleware('checkweixin');
-Route::resource('/v1','IndexController');
+Route::resource('/v1','IndexController')->middleware('checkweixin');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/home', 'HomeController@index')->name('home'); //概览

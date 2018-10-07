@@ -66,6 +66,7 @@ class IndexController extends Controller
         if(!$has_arr){
             $msg = '投票成功 剩余可投票次数4次';
         }else{
+            $vote_arr = array();
             foreach ($has_arr as $key=>$item){
                 $vote_arr[] = $item->option_id;
             }

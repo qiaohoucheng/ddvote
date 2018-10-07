@@ -94,16 +94,16 @@
             background-size: 100% 100%;
         }
         .search .search-input {
-            width: 6.693rem;
+            width:100%;
             border: none;
-            height: 100%;
+            height: 0.96rem;
+            line-height: 0.96rem;
             text-align: left;
             font-size: 0.32rem;
             padding: 0.1rem 0.533rem;
             padding-right: 0.266rem;
             color: #666;
             background-color: transparent;
-            width: 100%;
         }
         .search .search-btn {
             width: 2.24rem;

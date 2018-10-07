@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>我是{{ $data->option_name }}，我正在参与2018点金奖·新三板金牌董秘评选</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
@@ -150,8 +150,10 @@
             color: #fff;
             font-size: 0.346rem;
             margin: 0 0.533rem;
-            height: 10.64rem;
             overflow-y: auto;
+        }
+        .info-box ul {
+            margin-bottom: 0.6rem;
         }
         .info-box li {
             display: block;
@@ -331,6 +333,11 @@
             width: 100%;
             vertical-align: top;
         }
+        .info-box p {
+            font-size: 0.426rem;
+            color: #F0CA79;
+            margin-bottom: 0.533rem;
+        }
     </style>
     <script>
         var mql = window.matchMedia("(orientation: portrait)");
@@ -346,8 +353,7 @@
 <div class="nav bar-tab">
     <div class="nav bar-tab">
         <a href="/v1" class="tab-item">首页</a>
-        <a href="" class="tab-item">2018新三板点金奖<br>
-            金牌董秘颁奖大会报名</a>
+        <a href="http://t.cn/EvK14Nt" class="tab-item">中国新三板年度盛典暨<br>第二届点金奖颁奖典礼报名</a>
     </div>
 </div>
 <div id="app" v-cloak>
@@ -378,60 +384,37 @@
         </div>
     </div>
     <div class="info-box">
+        <p>“让努力，被看见” —— 2018<br>点金奖金牌董秘TOP100 榜单评选规则</p>
         <ul>
-            <li>2017新三板金牌董秘TOP1000榜单规则<br>
-                暨点金奖新三板金牌董秘颁奖规则</li>
-            <li>
-                10000+董秘<br>
-                是11594家公司和10000家投资机构<br>
-                30万投资人的链接器<br>
-                新三板市场最可爱的人</li>
-            <li>
-                金牌董秘<br>
-                是10000＋董秘的榜样<br>
-                整个新三板最应该被褒奖的人</li>
-            <li>
-                金牌董秘<br>
+            <li>10000+董秘<br>
+                是 10000+公司和 10000+家投资机构<br>
+                30 万投资人的链接器<br>新三板市场最可爱的人</li>
+            <li>金牌董秘<br>
                 必须是<br>
-                资本市场信息披露规则坚定的捍卫者<br>
-                资本运作的顶级高手<br>
+                资本市场信息披露规则坚定的捍卫者<br>资本运作的顶级高手<br>
                 市值管理的大师级人物<br>
-                挂牌公司坚实前行的杰出贡献者<br>
-                并且<br>
-                为全市场广泛认同  声誉卓著</li>
-            <li>
-                挖掘超过100万＋数据<br>
-                「读懂新三板」从信息披露、<br>
-                资本运作、<br>
-                市值管理、<br>
-                杰出贡献、<br>
-                外界评价、<br>
-                五个维度制作<br>
-                2017新三板金牌董秘TOP1000榜单</li>
-            <li>
-                并将在2017首届中国新三板年度盛典暨点金奖颁奖仪式上<br>
-                为其中的前十名授予<br>
-                2017点金奖新三板金牌董秘</li>
-            <li>
-                你的这一票，将决定参选董秘的<br>
-                “外界评价”得分<br>
-                每个微信账号只有5票<br>
-                给每一位董秘最多只能投1票<br>
-                是时候<br>
-                投出你的这一票了！</li>
+                挂牌公司监事坚实前行的杰出贡献者<br>并且<br>
+                为全市场广泛认同 声誉卓著</li>
+            <li>挖掘 100 万+数据<br>
+                「读懂新三板」从信息披露、<br>资本运作、<br>
+                市值管理、<br>杰出贡献、<br>外界评价、<br>五个维度制作<br>
+                2018 新三板金牌董秘 TOP100 榜单</li>
+            <li>并将在 2018 年中国新三板年度盛典<br>暨第二届点金奖颁奖典礼上<br>为其中的前十名授予<br>“2018 点金奖·新三板金牌董秘”称号</li>
+            <li>您的这一票，将决定参选董秘的<br>“外界评价”得分<br>每个微信账号每天可投 5 票<br>每天给每一位董秘最多可投 1 票<br>是时候，投出您的这一票<br>让 10000+新三板董秘的努力，被看见！</li>
         </ul>
+        <img src="/images/text.png" width="100%">
     </div>
     <div class="text">
         <h3>投票须知：</h3>
         <p>{!! htmlspecialchars_decode($info->theme_desc) !!} </p>
     </div>
 </div>
+<a href="javascript:hidepop()" class="mask" id="mask" style="display: none"></a>
 <form id="pic-form" action="" method="post" >
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="option_id" value="{{ $data->id }}">
     <input type="hidden" name="pic_id" id="submit-photo" >
     <input type="hidden" name="_method" value="put">
-    <a href="javascript:hidepop()" class="mask" id="mask" style="display: none"></a>
     <div class="pop-box" id="pop" style="display: none">
         <div class="pop-tit">图片上传</div>
         <input type="text" name="submit_name"  class="pop-input" placeholder="姓名（必填）">

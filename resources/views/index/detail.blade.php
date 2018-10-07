@@ -369,8 +369,8 @@
                 </div>
                 <div class="tab-item">
                     <div class="top-num">
-                        投票数：{{ $data->option_vote }}<br>
-                        总排名：13524
+                        投票数：<span id="dd_num">{{ $data->option_vote }}</span><br>
+                        总排名：<span id="dd_rank">13524</span>
                     </div>
                 </div>
             </div>
@@ -493,6 +493,9 @@
         $('.btn-group').on('click','.vote-btn',function(){
             var option_id = $(this).data('optionid');
             $.post('/v1',{'option_id':option_id,'_token':token},function(data){
+                if(data.code ==1){
+
+                }
                 layer.msg(data.message);
             });
 
@@ -553,7 +556,7 @@
             });
             wx.onMenuShareAppMessage({
                 title: '我是{{ $data->option_name }}，我正在参与2018点金奖·新三板金牌董秘评选',
-                desc: '让努力，被看见！投出你的一票，为10000+新三板董秘加油！',
+                desc: '请为我助力！让努力，被看见！',
                 link: link,
                 imgUrl: thumb,
                 type: 'link',

@@ -231,9 +231,12 @@
             $('#search-form').submit();
         })
         //投票
-        $('.list').on('click','.vote-btn',function(){
+            $('.list').on('click','.vote-btn',function(){
             var option_id = $(this).data('optionid');
             $.post('/v1',{'option_id':option_id,'_token':token},function(data){
+                if(data.code ==1){
+
+                }
                 layer.msg(data.message);
             });
         });

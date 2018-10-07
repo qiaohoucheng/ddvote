@@ -543,7 +543,7 @@
             var host = window.location.host;
             var thumb ="http://vote.dudong.com/images/default.png";
             wx.onMenuShareTimeline({
-                title: '我是秦始皇,打钱',
+                title: '我是{{ $data->option_name }}，我正在参与2018点金奖·新三板金牌董秘评选',
                 link: link,
                 imgUrl: thumb,
                 success: function () {
@@ -552,8 +552,8 @@
                 }
             });
             wx.onMenuShareAppMessage({
-                title: '我是秦始皇,打钱',
-                desc: '',
+                title: '我是{{ $data->option_name }}，我正在参与2018点金奖·新三板金牌董秘评选',
+                desc: '让努力，被看见！投出你的一票，为10000+新三板董秘加油！',
                 link: link,
                 imgUrl: thumb,
                 type: 'link',

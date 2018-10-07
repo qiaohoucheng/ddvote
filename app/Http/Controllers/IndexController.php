@@ -41,6 +41,10 @@ class IndexController extends Controller
         $data = Option::find($id);
         $info = Theme::find($this->vid);
         $info['theme_desc'] = str_replace(array("\r\n", "\n", "\r"),"<br />", $info['theme_desc']);
+        //排名
+        $count = Option::where('id',$id)->where('option_num','>',$data->option_num)
+            ->orderBy('option_num','desc')->count();
+        $data->rank = $count+1;
         return view('index.detail',compact('id','data','info'));
     }
     //投票

@@ -377,7 +377,7 @@
                 <div class="tab-item">
                     <div class="top-num">
                         投票数：<span id="dd_num">{{ $data->option_vote }}</span><br>
-                        总排名：<span id="dd_rank">13524</span>
+                        总排名：<span id="dd_rank">{{ $data->rank }}</span>
                     </div>
                 </div>
             </div>

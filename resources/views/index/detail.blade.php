@@ -367,7 +367,9 @@
     <div class="head">
         <div class="top">
             <div class="top-default">
-                <img src="">
+                @if(isset( $data->option_img ))
+                <img src="{{ $data->option_img }}">
+                @endif
             </div>
             <div class="top-info bar-tab">
                 <div class="tab-item">

@@ -64,28 +64,28 @@ class IndexController extends Controller
             ->where('created_at','<=',$tomorrow)
             ->select('option_id')->get();
         if($has_arr->count() ==0){
-            $msg = '投票成功 剩余可投票次数4次';
+            $msg = '投票成功！今日您还可为4名董秘投票！';
         }else{
             $vote_arr = array();
             foreach ($has_arr as $key=>$item){
                 $vote_arr[] = $item->option_id;
             }
             if(in_array($option_id,$vote_arr)){
-                return $this->qhc('40003','Sorry 一个人只能投一票哦');
+                return $this->qhc('40003','Sorry,每天给每位董秘只能投一票哦');
             }else{
                 $num = count($vote_arr);
                 switch($num){
                     case 1:
-                        $msg ='投票成功 剩余可投票次数3次';
+                        $msg ='投票成功！今日您还可为3名董秘投票！';
                         break;
                     case 2:
-                        $msg ='投票成功 剩余可投票次数2次';
+                        $msg ='投票成功！今日您还可为2名董秘投票！';
                         break;
                     case 3:
-                        $msg ='投票成功 剩余可投票次数1次';
+                        $msg ='投票成功！今日您还可为1名董秘投票！';
                         break;
                     case 4:
-                        $msg ='投票成功! 投票次数已用完';
+                        $msg ='投票成功! 今日投票次数已用完';
                         break;
                     case 5:
                     default:

@@ -88,7 +88,7 @@
             padding-top: 5.866rem;
         }
         .search {
-            background-image: url(/images/ic_vote2@2x.png);
+            background-image: url(/images/ic_search@2x.png);
             background-repeat: no-repeat;
             height: 0.96rem;
             background-size: 100% 100%;

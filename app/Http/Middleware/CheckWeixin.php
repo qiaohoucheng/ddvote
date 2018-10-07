@@ -17,6 +17,7 @@ class CheckWeixin
     {
         $uid = $request->session()->get('d2_uid');
         if(!$uid || $uid == 0){
+            $request->session()->put('reurl',$request->getRequestUri());
             return  redirect('/auth/weixin');
         }
         return $next($request);

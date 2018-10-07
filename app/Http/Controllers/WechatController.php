@@ -77,8 +77,8 @@ class WechatController extends Controller
                 $request->session()->put('d2_uid',$member->id);
             }
         }
-        return back();
-        //return redirect('/v1');
+        $reurl = $request->session()->get('reurl')?  $request->session()->get('reurl') :'/v1';
+        return redirect($reurl);
     }
 
 }

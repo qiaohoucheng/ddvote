@@ -217,7 +217,6 @@
         </div>
         </form>
     </div>
-    <p style="color:#fff;">当前用户:{{ Session::get('dd_uid') }}</p>
     <ul class="clear list" id="dd-content">
     </ul>
 </div>

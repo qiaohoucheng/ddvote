@@ -19,7 +19,7 @@ class IndexController extends Controller
     public function __construct()
     {
         $this->vid = 1;
-        $this->uid = session('dd_uid');
+        $this->uid = session('d2_uid');
         if(!$this->uid && $this->uid ==0){
             return redirect('/auth/weixin');
         }

@@ -7,12 +7,17 @@
             </a>
         </li>
         <!-- layui-nav-itemed -->
-        <li class="layui-nav-item {!! Request::is('theme*') ? ' layui-nav-itemed' : '' !!}">
+        <li class="layui-nav-item {!! Request::is('theme*') || Request::is('audit*') ? ' layui-nav-itemed' : '' !!}">
             <a class="" href="javascript:;">
                 <i class="layui-icon layui-icon-template-1"></i>
                 <cite>投票管理</cite>
             </a>
             <dl class="layui-nav-child">
+                <dd {!! Request::is('audit*') && !Request::is('audit/create') ? 'class="layui-this"' : '' !!} >
+                    <a href="{{ url('/audit') }}">
+                        <cite>快速审核</cite>
+                    </a>
+                </dd>
                 <dd {!! Request::is('theme*') && !Request::is('theme/create') ? 'class="layui-this"' : '' !!} >
                     <a href="{{ url('/theme') }}">
                         <cite>投票列表</cite>

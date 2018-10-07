@@ -12,7 +12,7 @@ class ThemeController extends Controller
     public function index(Request $request)
     {
         if($request->ajax('get')){
-            return $this->dataFormat(new Theme(),$request);
+            return $this->adminFormat(new Theme(),$request);
         }
         return view('theme.index');
     }

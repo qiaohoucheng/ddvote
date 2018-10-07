@@ -235,7 +235,8 @@
             var option_id = $(this).data('optionid');
             $.post('/v1',{'option_id':option_id,'_token':token},function(data){
                 if(data.code ==1){
-
+                    var text = $('.li_'+option_id).find('.dd-num').text();
+                    $('.li_'+option_id).find('.dd-num').text(Number(text)+Number(1));
                 }
                 layer.msg(data.message);
             });
@@ -255,11 +256,11 @@
                     //假设你的列表返回在data集合中
                     layui.each(res.data, function(index, item){
                         lis.push(
-                        '<li>'+
+                        '<li class="li_'+item.id+'">'+
                             '<a href=/v1/'+item.id+'>'+
                             '<div class="list-top">'+
                             '<img lay-src="'+item.path+'">'+
-                            '<div class="list-num">'+item.option_vote+'票</div>'+
+                            '<div class="list-num"><span class="dd-num">'+item.option_vote+'</span>票</div>'+
                             '</div>'+
                             '</a>'+
                         '<div class="list-bot bar-tab">'+

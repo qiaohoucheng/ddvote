@@ -139,7 +139,7 @@
         }
         .list-top {
             height: 2.4rem;
-            background-image: url(/images/default.png);
+            background-image: url(/images/default1.png);
             background-repeat: no-repeat;
             background-size: 100%;
             overflow: hidden;

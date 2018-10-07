@@ -449,6 +449,7 @@
     function hidepop() {
         document.getElementById('mask').style.display="none";
         document.getElementById('pop').style.display="none";
+        document.getElementById('share').style.display="none";
     }
     function showshare() {
         document.getElementById('mask').style.display="block";

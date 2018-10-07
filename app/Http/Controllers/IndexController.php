@@ -89,7 +89,7 @@ class IndexController extends Controller
                         break;
                     case 5:
                     default:
-                        return  $this->qhc('40001','Sorry 您今日投票次数已用完');
+                        return  $this->qhc('40001','Sorry,您今日的投票次数已用完，请明天再来~');
                         break;
 
                 }

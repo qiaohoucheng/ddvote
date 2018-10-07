@@ -496,13 +496,14 @@
         var $ = layui.jquery;
         var layer = layui.layer;
         var token ='{{ csrf_token() }}';
-        FastClick.attach(document.body);
+        //FastClick.attach(document.body);
         //投票
         $('.btn-group').on('click','.vote-btn',function(){
             var option_id = $(this).data('optionid');
             $.post('/v1',{'option_id':option_id,'_token':token},function(data){
                 if(data.code ==1){
-
+                    var text = $('#dd_num').val()
+                    $('#dd_num').val(text+1);
                 }
                 layer.msg(data.message);
             });

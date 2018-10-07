@@ -86,7 +86,7 @@
         }
         .top-default {
             height: 5.013rem;
-            background-image: url(/images/default1.png);
+            background-image: url(/images/default.png);
             background-repeat: no-repeat;
             background-size: cover;
             overflow: hidden;

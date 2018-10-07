@@ -338,6 +338,13 @@
             color: #F0CA79;
             margin-bottom: 0.533rem;
         }
+        .share-icon {
+            position: fixed;
+            top: 0.746rem;
+            right: 0.533rem;
+            width: 3.813rem;
+            z-index: 1000;
+        }
     </style>
     <script>
         var mql = window.matchMedia("(orientation: portrait)");

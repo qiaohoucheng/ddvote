@@ -313,7 +313,7 @@
             var link = window.location.href;
             var protocol = window.location.protocol;
             var host = window.location.host;
-            var thumb ='http://vote.dudong.com/images/default.png';
+            var thumb ='http://vote.dudong.com/images/share.png';
             wx.onMenuShareTimeline({
                 title: '{{ $data->theme_name }}',
                 link: link,

@@ -553,7 +553,7 @@
             var link = window.location.href;
             var protocol = window.location.protocol;
             var host = window.location.host;
-            var thumb ="http://vote.dudong.com/images/default.png";
+            var thumb ="http://vote.dudong.com/images/share.png";
             wx.onMenuShareTimeline({
                 title: '我是{{ $data->option_name }}，我正在参与2018点金奖·新三板金牌董秘评选',
                 link: link,

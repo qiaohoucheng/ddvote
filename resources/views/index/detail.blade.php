@@ -503,7 +503,7 @@
             $.post('/v1',{'option_id':option_id,'_token':token},function(data){
                 if(data.code ==1){
                     var text = $('#dd_num').text();
-                    $('#dd_num').text(text+1);
+                    $('#dd_num').text(parseInt(text)+1);
                 }
                 layer.msg(data.message);
             });

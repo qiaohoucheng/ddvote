@@ -15,20 +15,14 @@ use Validator;
 class IndexController extends Controller
 {
     protected  $vid;
-    protected  $uid;
     public function __construct()
     {
         $this->vid = 1;
-        $this->uid = session('d2_uid');
-        if(!$this->uid && $this->uid ==0){
-            return redirect('/auth/weixin');
-        }
-
     }
     //首页
     public function index(Request $request)
     {
-        var_dump('uid:'.$this->uid);
+        var_dump('uid:'.$request->session()->get('d2_uid'));
         exit;
         if($request->ajax()){
             return $this->load_data($request);
@@ -54,7 +48,8 @@ class IndexController extends Controller
     //投票
     public function store(Request $request)
     {
-        $mid = $this->uid?$this->uid:0;
+        
+        $mid = $request->session()->get('d2_uid')?$request->session()->get('d2_uid'):0;
         $option_id = $request->input('option_id');
         $vid = $this->vid;
         $theme = Theme::find($vid);

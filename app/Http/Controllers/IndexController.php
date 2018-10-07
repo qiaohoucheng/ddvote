@@ -15,9 +15,15 @@ use Validator;
 class IndexController extends Controller
 {
     protected  $vid;
-    public function __construct()
+    protected  $uid;
+    public function __construct(Request $request)
     {
         $this->vid = 1;
+        $this->uid = $request->session()->get('dd_uid');
+        if(!$this->uid && $this->uid ==0){
+            return redirect('/auth/weixin');
+        }
+
     }
     //首页
     public function index(Request $request)
@@ -46,7 +52,6 @@ class IndexController extends Controller
     //投票
     public function store(Request $request)
     {
-        $this->uid = 1;
         $mid = $this->uid?$this->uid:0;
         $option_id = $request->input('option_id');
         $vid = $this->vid;
@@ -63,7 +68,7 @@ class IndexController extends Controller
             ->where('created_at','>=',$today)
             ->where('created_at','<=',$tomorrow)
             ->select('option_id')->get();
-        if(!$has_arr){
+        if($has_arr->count() ==0){
             $msg = '投票成功 剩余可投票次数4次';
         }else{
             $vote_arr = array();
@@ -112,7 +117,6 @@ class IndexController extends Controller
     //提交审核
     public function update(Request $request)
     {
-        $this->uid = 1;
         $rules = [
             'submit_name'=>'required',
             'mobile' => 'required',

@@ -323,7 +323,7 @@
             });
             wx.onMenuShareAppMessage({
                 title: '{{ $data->theme_name }}',
-                desc: '',
+                desc: '让努力，被看见！投出你的一票，为10000+新三板董秘加油！',
                 link: link,
                 imgUrl: thumb,
                 type: 'link',

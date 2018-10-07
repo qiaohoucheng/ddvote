@@ -86,7 +86,7 @@
         }
         .top-default {
             height: 5.013rem;
-            background-image: url(/images/default.png);
+            background-image: url(/images/default1.png);
             background-repeat: no-repeat;
             background-size: cover;
             overflow: hidden;
@@ -502,8 +502,8 @@
             var option_id = $(this).data('optionid');
             $.post('/v1',{'option_id':option_id,'_token':token},function(data){
                 if(data.code ==1){
-                    var text = $('#dd_num').val()
-                    $('#dd_num').val(text+1);
+                    var text = $('#dd_num').text();
+                    $('#dd_num').text(text+1);
                 }
                 layer.msg(data.message);
             });

@@ -29,6 +29,7 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         var_dump('uid:'.$this->uid);
+        exit;
         if($request->ajax()){
             return $this->load_data($request);
         }else{

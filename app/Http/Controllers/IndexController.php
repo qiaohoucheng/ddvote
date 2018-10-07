@@ -22,8 +22,6 @@ class IndexController extends Controller
     //首页
     public function index(Request $request)
     {
-        var_dump('uid:'.$request->session()->get('d2_uid'));
-        exit;
         if($request->ajax()){
             return $this->load_data($request);
         }else{
@@ -48,7 +46,7 @@ class IndexController extends Controller
     //投票
     public function store(Request $request)
     {
-        
+
         $mid = $request->session()->get('d2_uid')?$request->session()->get('d2_uid'):0;
         $option_id = $request->input('option_id');
         $vid = $this->vid;
@@ -132,7 +130,7 @@ class IndexController extends Controller
             $data['mobile'] = $request->input('mobile');
             $data['photo'] = $request->input('pic_id');
             $data['created_at'] = strtotime(Carbon::now());
-            $data['member_id'] = $this->uid ? $this->uid :0;
+            $data['member_id'] = $request->session()->get('d2_uid') ? $request->session()->get('d2_uid'):0;
             $data['option_id'] = $request->input('option_id');
             $id = DB::table('audit')->insertGetId($data);
             if($id >0){

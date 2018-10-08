@@ -67,7 +67,6 @@
         }
         .cover img {
             width: 100%;
-            height: 100%;
             vertical-align: top;
             border-top-left-radius: 3px;
             border-top-right-radius: 3px;
@@ -196,7 +195,7 @@
                     if(data.option_id >0){
                         //清除数据
                         $("#dd-idlist li.li-item").remove();
-                        layer.open({
+                         layer.open({
                             type: 1,
                             title: '查看照片',
                             closeBtn: 0,
@@ -213,7 +212,7 @@
                                     $.post('/audit',{'aid':aid,'option_id':optionid,'_token':token},function(data){
                                         layer.msg(data.message);
                                         if(data.code ==1){
-
+                                            layer.close(index);
                                         }
                                     });
                                 }else{

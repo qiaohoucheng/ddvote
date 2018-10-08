@@ -234,11 +234,11 @@
 
                                     inhtml+='<img src="/images/select.png" class="select">'+
                                     '<div class="cover">'+
-                                    '<img src="" onerror="javascript:this.src=\'/images/default.png\';">'+
+                                    '<img src="'+data.photo+'" onerror="javascript:this.src=\'/images/default.png\';">'+
                                     '</div>'+
                                     '<div class="info">'+
-                                    '<h3 class="ellipsis">我是谁</h3>'+
-                                    '<p class="ellipsis">我在哪</p>'+
+                                    '<h3 class="ellipsis">'+data.name+'</h3>'+
+                                    '<p class="ellipsis">'+data.mobile+'</p>'+
                                     '</div>'+
                                     '</div>'+
                                     '</li>';

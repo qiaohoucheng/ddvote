@@ -37,12 +37,12 @@ class AuditController extends Controller
                 ->orwhere('option_name','like','%'.$keyword.'%')
                 ->count();
         }else{
-            $data  = $model::with(['options'=>function($query){
-                $query->select('id','option_name','option_company','option_code');
+            $data  = $model::groupBy('option_id')->with(['options'=>function($query){
+                $query->select('id','option_name','option_company','option_code','option_img');
             }])->offset($start)->limit($limit)->orderBy($field,$order)->get()->toArray();
             $count = $model::with(['options'=>function($query){
-                $query->select('option_name','option_company','option_code');
-            }])->count();
+                $query->select('option_name','option_company','option_code','option_img');
+            }])->groupBy('option_id')->count();
         }
         $pages = ceil($count/$limit);
         foreach ($data as $k=>&$item)
@@ -62,13 +62,14 @@ class AuditController extends Controller
     //查找
     public function show($id)
     {
-       $data = Audit::with('imgurl')->where('option_id',$id)->get()->toArray();
+       $data = Audit::with('imgurl')->has('imgurl')->where('option_id',$id)->get()->toArray();
        return $this->qhc(1,'成功',$data);
     }
     //审核
     public function store(Request $request)
     {
         if($request->input('aid') && $request->input('option_id')){
+            Audit::where('option_id',$request->input('option_id'))->update(['status'=>0]);
             $info = Audit::find($request->input('aid'));
             $options = Option::find($request->input('option_id'));
             $imgurl = $info->imgurl;

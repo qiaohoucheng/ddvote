@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Option;
 use Illuminate\Http\Request;
 use App\Model\Audit;
 
@@ -57,5 +58,32 @@ class AuditController extends Controller
             'pages'=>$pages,
         );
         return $return;
+    }
+    //查找
+    public function show($id)
+    {
+       $data = Audit::where('option_id',$id)->get()->toArray();
+       return $this->qhc(1,'成功',$data);
+    }
+    //审核
+    public function store(Request $request)
+    {
+        if($request->input('aid') && $request->input('option_id')){
+            $info = Audit::find($request->input('aid'));
+            $options = Option::find($request->input('option_id'));
+            $options->option_img = $info->photo;
+            $options->option_mobile = $info->mobile;
+            $res = $options->save();
+            if($res){
+                $info->status = 1;
+                $result = $info->save();
+                if($result){
+                    return $this->qhc(1,'审核成功',$info);
+                }
+            }
+            return $this->qhc(0,'审核失败');
+        }else{
+            return $this->qhc(0,'缺少参数');
+        }
     }
 }

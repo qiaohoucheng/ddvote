@@ -29,6 +29,7 @@
         @include('common.footer')
     </div>
 </div>
+@include('common.dialog')
 <script>
     //JavaScript代码区域
     layui.use('element', function(){

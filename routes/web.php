@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/option/load','OptionController@load_data');
     Route::post('/excel/export','ExcelController@export');
     Route::post('/excel/import','ExcelController@import');
+    Route::resource('/audit', 'AuditController');
 });
 Route::get('/getconfig','WechatController@getconfig');
 //weixin login

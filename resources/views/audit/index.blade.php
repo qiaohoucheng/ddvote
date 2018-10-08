@@ -234,7 +234,7 @@
 
                                     inhtml+='<img src="/images/select.png" class="select">'+
                                     '<div class="cover">'+
-                                    '<img src="'+v.photo+'" onerror="javascript:this.src=\'/images/default.png\';">'+
+                                    '<img src="'+v.imgurl.url+'" onerror="javascript:this.src=\'/images/default.png\';">'+
                                     '</div>'+
                                     '<div class="info">'+
                                     '<h3 class="ellipsis">'+v.name+'</h3>'+

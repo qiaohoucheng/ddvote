@@ -62,7 +62,7 @@ class AuditController extends Controller
     //查找
     public function show($id)
     {
-       $data = Audit::where('option_id',$id)->get()->toArray();
+       $data = Audit::with('imgurl')->where('option_id',$id)->get()->toArray();
        return $this->qhc(1,'成功',$data);
     }
     //审核

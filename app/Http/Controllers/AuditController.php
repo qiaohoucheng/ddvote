@@ -71,7 +71,8 @@ class AuditController extends Controller
         if($request->input('aid') && $request->input('option_id')){
             $info = Audit::find($request->input('aid'));
             $options = Option::find($request->input('option_id'));
-            $options->option_img = $info->photo;
+            $imgurl = $info->imgurl;
+            $options->option_img = $imgurl->url;
             $options->option_mobile = $info->mobile;
             $res = $options->save();
             if($res){

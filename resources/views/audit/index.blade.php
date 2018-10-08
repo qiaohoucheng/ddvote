@@ -234,11 +234,11 @@
 
                                     inhtml+='<img src="/images/select.png" class="select">'+
                                     '<div class="cover">'+
-                                    '<img src="'+data.photo+'" onerror="javascript:this.src=\'/images/default.png\';">'+
+                                    '<img src="'+v.photo+'" onerror="javascript:this.src=\'/images/default.png\';">'+
                                     '</div>'+
                                     '<div class="info">'+
-                                    '<h3 class="ellipsis">'+data.name+'</h3>'+
-                                    '<p class="ellipsis">'+data.mobile+'</p>'+
+                                    '<h3 class="ellipsis">'+v.name+'</h3>'+
+                                    '<p class="ellipsis">'+v.mobile+'</p>'+
                                     '</div>'+
                                     '</div>'+
                                     '</li>';

@@ -210,7 +210,7 @@
 {{--</div>--}}
 <div id="app">
     <div class="search-box">
-        <form action="/" method="get" id="search-form">
+        <form action="/v1" method="get" id="search-form">
         <div class="search bar-tab">
             <input type="search" value="{{ $keyword }}" class="search-input tab-item" name="keyword" placeholder="请输入姓名或公司代码搜索参投董秘嘉宾">
             <a href="javascript:;" class="search-btn tab-item"></a>
@@ -259,7 +259,7 @@
                         '<li class="li_'+item.id+'">'+
                             '<a href=/v1/'+item.id+'>'+
                             '<div class="list-top">'+
-                            '<img lay-src="'+item.path+'">'+
+                            '<img lay-src="'+item.option_img+'">'+
                             '<div class="list-num"><span class="dd-num">'+item.option_vote+'</span>票</div>'+
                             '</div>'+
                             '</a>'+

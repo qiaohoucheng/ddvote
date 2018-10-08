@@ -103,15 +103,16 @@
 <div class="layui-card layadmin-header">
     <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
         <a href="{{ url('audit') }}">投票管理</a><span lay-separator="">/</span>
-        <a><cite>投票列表</cite></a>
+        <a><cite>快速审核</cite></a>
     </div>
     <div class="layui-fluid">
+        <input type="hidden" value="" name="optionid" id="optionid">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md12">
                 <div class="layui-card">
                     <div class="layui-card-header">
                         <div class="pull-right">
-                            <a href="{{ url('/audit/create') }}" class="layui-btn layui-btn-sm" >上传照片</a>
+                            {{--<a href="{{ url('/audit/create') }}" class="layui-btn layui-btn-sm" >上传照片</a>--}}
                         </div>
                     </div>
                     <div class="layui-card-body">
@@ -140,7 +141,7 @@
                              }}
                         </script>
                         <script type="text/html" id="sbox">
-                            @{{#  if(d.status == 1){ }}
+                            @{{#  if(d.option_img.length >0){ }}
                             <span class="layui-badge layui-bg-green">已审核</span>
                             @{{#  }else{ }}
                             <span class="layui-badge layui-bg-orange">未审核</span>
@@ -166,9 +167,30 @@
             //拖拽上传
             upload.render({
                 elem: '#test10'
-                ,url: '/upload/'
+                ,url: '/file/adminUpload'
+                ,before: function(obj){
+                    //layer.load(); //上传loading
+                    var optionid = $('#optionid').val();
+                    this.data={'_token':token,'option_id':optionid};
+                }
                 ,done: function(res){
+                    var inhtml='';
                     console.log(res)
+                    if(res.code == 1){
+                        inhtml+='<li class="li-item">';
+                        inhtml+='<div class="dd-item " data-aid="'+res.data.id+'" data-optionid="'+res.data.option_id+'">';
+                        inhtml+='<img src="/images/select.png" class="select">'+
+                            '<div class="cover">'+
+                            '<img src="'+res.data.url+'" onerror="javascript:this.src=\'/images/default.png\';">'+
+                            '</div>'+
+                            '<div class="info">'+
+                            '<h3 class="ellipsis">'+res.data.name+'</h3>'+
+                            '<p class="ellipsis">'+res.data.mobile+'</p>'+
+                            '</div>'+
+                            '</div>'+
+                            '</li>';
+                        document.getElementById('dd-idlist').insertAdjacentHTML("afterBegin",inhtml);
+                    }
                 }
             });
             //获取数据
@@ -181,7 +203,7 @@
                     ,{field:'option_name', width:200,title:'董秘名称'}
                     ,{field:'option_company',width:200,align:'center',title:'公司名称'}
                     ,{field:'option_code',width:200,align:'center',title:'公司代码'}
-                    ,{field:'status', width:150,title:'状态', templet:'#sbox',align:'center'}
+                    ,{field:'option_img', width:150,title:'状态', templet:'#sbox',align:'center'}
                     ,{fixed:'right', toolbar: '#barDemo',title:'操作'}
                 ]],
                 done: function(res){
@@ -193,6 +215,7 @@
                 var data = obj.data;
                 if(obj.event === 'pass'){
                     if(data.option_id >0){
+                        $('#optionid').val(data.option_id);
                         //清除数据
                         $("#dd-idlist li.li-item").remove();
                          layer.open({
@@ -213,6 +236,9 @@
                                         layer.msg(data.message);
                                         if(data.code ==1){
                                             layer.close(index);
+                                            setTimeout(function(){
+                                                window.location.reload();
+                                            },1000);
                                         }
                                     });
                                 }else{

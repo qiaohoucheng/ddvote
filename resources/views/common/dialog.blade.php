@@ -17,7 +17,7 @@
             }else{
                 $(this).addClass("active");
             }
-            $(this).parent().siblings().find('.item').removeClass("active");
+            $(this).parent().siblings().find('.dd-item').removeClass("active");
         })
     })
 </script>

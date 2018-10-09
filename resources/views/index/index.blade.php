@@ -191,6 +191,9 @@
             display: block;
             vertical-align: middle;
         }
+        .layui-flow-more{
+            clear:both;
+        }
 
     </style>
     <script>

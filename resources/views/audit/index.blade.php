@@ -141,7 +141,7 @@
                              }}
                         </script>
                         <script type="text/html" id="sbox">
-                            @{{#  if(d.option_img.length >0){ }}
+                            @{{#  if(d.option_img !==null ){ }}
                             <span class="layui-badge layui-bg-green">已审核</span>
                             @{{#  }else{ }}
                             <span class="layui-badge layui-bg-orange">未审核</span>

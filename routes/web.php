@@ -31,3 +31,4 @@ Route::get('auth/weixin', 'WechatController@redirectToProvider');
 Route::get('auth/weixin/callback', 'WechatController@handleProviderCallback');
 //file
 Route::post('/file/uploadPicture', 'FileController@uploadPicture');
+Route::post('/file/adminUpload', 'FileController@adminUpload');

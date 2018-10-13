@@ -11,6 +11,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected  $s = 0;
+    protected  $f;
     public function adminFormat($model,$request)
     {
         //初始化
@@ -66,7 +68,24 @@ class Controller extends BaseController
                 ->orwhere('option_name','like','%'.$keyword.'%')
                 ->count();
         }else{
-            $data  = $model::offset($start)->limit($limit)->orderBy($field,$order)->get()->toArray();
+            $data  = $model::whereBetween('option_vote', [1000, 3000])
+                ->offset($start)->limit($limit)
+                ->orderBy($field,$order)->get()->toArray();
+            if(count($data) < 10 ){
+                if( $this->s == 0  ){
+                    $this->s = $page;
+                    $this->f = count($data);
+                    $start =  ($page-$this->s) * $limit;
+                    $limit = ceil($limit-$this->f);
+                }else{
+                    $start = ($page-$this->s) * $limit - $this->f;
+                }
+                $start <= 0 ? 0 : $start;
+                $data2 = $model::whereNotBetween('option_vote', [1000, 3000])
+                ->offset($start)->limit($limit)
+                ->orderBy($field,$order)->get()->toArray();
+                $data = array_merge($data,$data2);
+            }
             $count = $model::count();
         }
         $pages = ceil($count/$limit);
@@ -78,6 +97,9 @@ class Controller extends BaseController
             'msg'=>'查询成功',
             'data'=>$data,
             'pages'=>$pages,
+            'start'=>$start,
+            'limit'=>$limit,
+            's'=>$this->s
         );
         return $return;
     }

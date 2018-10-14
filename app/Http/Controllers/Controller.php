@@ -11,7 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected  $s = 0;
     protected  $f;
     public function adminFormat($model,$request)
     {
@@ -72,13 +71,14 @@ class Controller extends BaseController
                 ->offset($start)->limit($limit)
                 ->orderBy($field,$order)->get()->toArray();
             if(count($data) < 10 ){
-                if( $this->s == 0  ){
-                    $this->s = $page;
+                $wcount = $model::whereBetween('option_vote', [1000, 3000])->count();
+                $stop = ceil($wcount/20);
+                if($stop == $page){
                     $this->f = count($data);
-                    $start =  ($page-$this->s) * $limit;
+                    $start =  ($page-$stop) * $limit;
                     $limit = ceil($limit-$this->f);
                 }else{
-                    $start = ($page-$this->s) * $limit - $this->f;
+                    $start = ($page-$stop ) * $limit - $this->f;
                 }
                 $start <= 0 ? 0 : $start;
                 $data2 = $model::whereNotBetween('option_vote', [1000, 3000])
@@ -96,10 +96,7 @@ class Controller extends BaseController
             'count'=>$count,
             'msg'=>'查询成功',
             'data'=>$data,
-            'pages'=>$pages,
-            'start'=>$start,
-            'limit'=>$limit,
-            's'=>$this->s
+            'pages'=>$pages
         );
         return $return;
     }

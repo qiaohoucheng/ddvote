@@ -201,7 +201,7 @@
 <body>
 <div class="nav bar-tab">
     <a href="/v2" class="tab-item">首页</a>
-    <a href="" class="tab-item">中国新三板年度盛典暨<br/>第二届点金奖颁奖典礼报名</a>
+    <a href="http://t.cn/EvK14Nt" class="tab-item">中国新三板年度盛典暨<br/>第二届点金奖颁奖典礼报名</a>
 </div>
 <div id="app">
     <div style="padding-top: 2.666rem;background-image: url(/images/top-bg.png);background-repeat: no-repeat;background-size: 89.4% auto;background-position: center 0.533rem;"></div>

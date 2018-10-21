@@ -287,7 +287,7 @@
             });
             wx.onMenuShareAppMessage({
                 title: '{{ $data->theme_name }}',
-                desc: '让努力，被看见！投出你的一票，为10000+新三板董秘加油！',
+                desc: '2018年，谁是券商中的佼佼者？ 投出您的一票，为中国新三板券商业务主体加油！',
                 link: link,
                 imgUrl: thumb,
                 type: 'link',

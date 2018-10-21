@@ -208,7 +208,7 @@
     <div style="padding-top: 2.666rem;background-image: url(/images/top-bg.png);background-repeat: no-repeat;background-size: 89.4% auto;background-position: center 0.533rem;"></div>
     <div class="detail-top" style="padding-top: 0;">
         <div style="height: 2.133rem;background-color: #fff;position: relative;">
-            <img src="/images/default.png" style="width: 100%;height: auto;top: 50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);position: absolute;left: 0">
+            <img src="{{ $data['company']['c_logo'] }}" style="width: 100%;height: auto;top: 50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);position: absolute;left: 0">
         </div>
     </div>
     <ul class="clear list">

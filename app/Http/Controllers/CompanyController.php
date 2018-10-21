@@ -30,6 +30,8 @@ class CompanyController extends Controller
     {
         //奖项详情
         $data = Theme::find($this->vid)->toArray();
+        //券商详情
+        $data['company'] = Company::find($id)->toArray();
         $data['theme_desc'] = str_replace(array("\r\n", "\n", "\r"),"<br />", $data['theme_desc']);
         //奖项分类
         $data['prize'] = Prize::all()->toArray();

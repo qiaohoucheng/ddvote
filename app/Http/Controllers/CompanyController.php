@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Theme;
 use App\Model\Company;
+use App\Model\Prize;
+
 class CompanyController extends Controller
 {
     protected  $vid;
@@ -26,7 +28,13 @@ class CompanyController extends Controller
     }
     public function show($id)
     {
-        $data = '';
+        //奖项详情
+        $data = Theme::find($this->vid)->toArray();
+        $data['theme_desc'] = str_replace(array("\r\n", "\n", "\r"),"<br />", $data['theme_desc']);
+        //奖项分类
+        $data['prize'] = Prize::all()->toArray();
+        //具体票数
+        //dd($data['prize']);
         return view('company.show',compact('id','data'));
     }
     public function load_data($request)
@@ -60,5 +68,20 @@ class CompanyController extends Controller
     public function store()
     {
 
+    }
+    public function pic()
+    {
+       $c  = Company::all();
+       foreach ($c as $k=>$v)
+       {
+            $file_name = public_path().'/logo/'.$v->c_name.'.png';
+            if(file_exists($file_name)){
+                $content = file_get_contents($file_name);
+                $putname = 'dd00'.$v->id.'.png';
+                file_put_contents(public_path().'/logo/'.$putname,$content);
+                //var_dump($content);exit;
+            }
+            echo $v->c_name.'<br/>';
+       }
     }
 }

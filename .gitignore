@@ -13,3 +13,4 @@ yarn-error.log
 .env
 /public/pic
 /app/database.php
+/public/logo

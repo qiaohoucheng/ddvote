@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>{{ $data['theme_name'] }}</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
@@ -205,33 +205,22 @@
         金牌董秘颁奖大会报名</a>
 </div>
 <div id="app">
-    <div class="detail-top">
-        <div>
-            <img src="/images/default.png">
+    <div style="padding-top: 2.666rem;background-image: url(/images/top-bg.png);background-repeat: no-repeat;background-size: 89.4% auto;background-position: center 0.533rem;"></div>
+    <div class="detail-top" style="padding-top: 0;">
+        <div style="height: 2.133rem;background-color: #fff;position: relative;">
+            <img src="/images/default.png" style="width: 100%;height: auto;top: 50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);position: absolute;left: 0">
         </div>
     </div>
     <ul class="clear list">
+        @foreach( $data['prize'] as $k =>$v)
         <li class="bar-tab">
             <div class="tab-item ellipsis">
-                <div class="tab-item name">最佳推荐挂牌券商奖</div>
+                <div class="tab-item name">{{ $v['prize_name'] }}</div>
                 <div class="tab-item num">4654票</div>
             </div>
             <a class="tab-item"></a>
         </li>
-        <li class="bar-tab">
-            <div class="tab-item ellipsis">
-                <div class="tab-item name">最佳推荐挂牌券商奖</div>
-                <div class="tab-item num">4654票</div>
-            </div>
-            <a class="tab-item"></a>
-        </li>
-        <li class="bar-tab">
-            <div class="tab-item ellipsis">
-                <div class="tab-item name">最佳推荐挂牌券商奖</div>
-                <div class="tab-item num">4654票</div>
-            </div>
-            <a class="tab-item"></a>
-        </li>
+        @endforeach
     </ul>
     <div class="info-box">
         <ul>
@@ -279,9 +268,9 @@
     </div>
     <div class="text">
         <h3>投票须知：</h3>
-        <p>1、2017新三板金牌董秘TOP1000榜单中的TOP10将获得点金奖2017新三板金牌董秘称号，并将在2017首届中国新三板年度盛典暨点金奖颁奖仪式领奖。<br>
-            2、以1亿数据为基础，点金奖将客观评选新三板市场中的董秘、挂牌公司、券商机构、投资机构以及其他中介机构，具体榜单和奖项如上。<br>
-            3、在法律许可范围内，本活动最终解释权归读懂新三板所有。</p>
+        <p>
+            {!! htmlspecialchars_decode($data['theme_desc']) !!}
+        </p>
     </div>
 </div>
 </body>

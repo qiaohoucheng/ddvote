@@ -57,8 +57,30 @@ class CompanyController extends Controller
         );
         return $return;
     }
-    public function store()
+    public function store(Request $request)
     {
-
+        if($request->input('id') && $request->input('type')){
+            $data = Company::where('id',$request->input('id'))->first();
+        }
+        if($data['vid']>0){
+            $data['info'] = M('vote')->where(" id = {$data['vid']} ")->find();
+            //简介
+            //$info['desc'] = str_replace(array("\r\n", "\n", "\r"),"<br />", $info['desc']);
+            //奖项
+            if($data['awards_ids']){
+                $where['id'] = array('in',$data['awards_ids']);
+                $data['award'] = M('awards')->where($where)->select();
+                //统计票数
+                if($data['award']){
+                    foreach($data['award'] as $k=>$v){
+                        $vote_where['vid'] = $data['vid'];
+                        $vote_where['aid'] = $v['id'];
+                        $vote_where['cid'] = $id;
+                        $data['award'][$k]['vote_num'] = M('company_log')->where($vote_where)->count();
+                    }
+                }
+            }
+        }
+        $this->as
     }
 }

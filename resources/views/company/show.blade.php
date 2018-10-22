@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>{{ $data['theme_name'] }}</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
@@ -200,92 +200,160 @@
 </head>
 <body>
 <div class="nav bar-tab">
-    <a href="" class="tab-item">首页</a>
-    <a href="" class="tab-item">2018新三板点金奖<br>
-        金牌董秘颁奖大会报名</a>
+    <a href="/v2" class="tab-item">首页</a>
+    <a href="http://t.cn/EvK14Nt" class="tab-item">中国新三板年度盛典暨<br/>第二届点金奖颁奖典礼报名</a>
 </div>
 <div id="app">
-    <div class="detail-top">
-        <div>
-            <img src="/images/default.png">
+    <div style="padding-top: 2.666rem;background-image: url(/images/top-bg.png);background-repeat: no-repeat;background-size: 89.4% auto;background-position: center 0.533rem;"></div>
+    <div class="detail-top" style="padding-top: 0;">
+        <div style="height: 2.133rem;background-color: #fff;position: relative;">
+            <img src="{{ $data['company']['c_logo'] }}" style="width: 100%;height: auto;top: 50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);position: absolute;left: 0">
         </div>
     </div>
     <ul class="clear list">
+        @foreach( $data['prize'] as $k =>$v)
         <li class="bar-tab">
             <div class="tab-item ellipsis">
-                <div class="tab-item name">最佳推荐挂牌券商奖</div>
-                <div class="tab-item num">4654票</div>
+                <div class="tab-item name">{{ $v['prize_name'] }}</div>
+                <div class="tab-item num"><span id="{{ $v['id'] }}box">{{ $data['company']['v'.$v['id']] }}</span> 票</div>
             </div>
-            <a class="tab-item"></a>
+            <a class="tab-item vote-btn" href="javascript:;" data-pid="{{ $v['id'] }}"></a>
         </li>
-        <li class="bar-tab">
-            <div class="tab-item ellipsis">
-                <div class="tab-item name">最佳推荐挂牌券商奖</div>
-                <div class="tab-item num">4654票</div>
-            </div>
-            <a class="tab-item"></a>
-        </li>
-        <li class="bar-tab">
-            <div class="tab-item ellipsis">
-                <div class="tab-item name">最佳推荐挂牌券商奖</div>
-                <div class="tab-item num">4654票</div>
-            </div>
-            <a class="tab-item"></a>
-        </li>
+        @endforeach
     </ul>
     <div class="info-box">
         <ul>
-            <li>2017新三板金牌董秘TOP1000榜单规则<br>
-                暨点金奖新三板金牌董秘颁奖规则</li>
+            <li>2018点金奖·券商综合实力TOP20榜单评选规则<br>
+                暨点金奖新三板券商奖项颁奖规则
+            </li>
             <li>
-                10000+董秘<br>
-                是11594家公司和10000家投资机构<br>
-                30万投资人的链接器<br>
-                新三板市场最可爱的人</li>
+                「读懂新三板」从多维度对券商业务进行梳理<br>
+                旨在发现新三板综合实力最强<br>
+                在推荐挂牌、持续督导、做市各业务领域<br>
+                处于领先地位的券商<br>
+                我们希望<br>
+                能够以榜单排名的形式，为挂牌公司提供选择依据<br>
+                降低挂牌公司选择中介服务机构的抉择成本<br>
+                提高市场的运行效率<br>
+                推动多层次资本市场的健康发展<br>
+            </li>
             <li>
-                金牌董秘<br>
-                是10000＋董秘的榜样<br>
-                整个新三板最应该被褒奖的人</li>
+                本次活动采取线下线上共同评选的方式<br>
+                对新三板市场券商的多项业务进行逐一评选，产生:<br>
+                “最佳推荐挂牌券商TOP20”榜单</li>
+                “最佳督导券商TOP20”榜单</li>
+                “最佳做市商TOP20”榜单</li>
+                并在此三项榜单评选的基础上综合其他因素</li>
+                最终产生“新三板券商综合实力TOP20”榜单</li>
             <li>
-                金牌董秘<br>
-                必须是<br>
-                资本市场信息披露规则坚定的捍卫者<br>
-                资本运作的顶级高手<br>
-                市值管理的大师级人物<br>
-                挂牌公司坚实前行的杰出贡献者<br>
-                并且<br>
-                为全市场广泛认同  声誉卓著</li>
+                本次线上投票共分三类<br>
+                最佳做市券商、最佳督导券商、最佳挂牌券商<br>
+                最具综合实力券商线上投票结果将由该三部分的投票结果综合产生<br>
+                投票综合数据将计入<br>
+                “券商综合实力TOP20榜单”的最终评选结果<br>
+                占评选比重20%<br>
+                每个微信ID每天只能投10票<br>
+                每天给每个券商奖项可投1票，不能重复投票<br>
             <li>
-                挖掘超过100万＋数据<br>
-                「读懂新三板」从信息披露、<br>
-                资本运作、<br>
-                市值管理、<br>
-                杰出贡献、<br>
-                外界评价、<br>
-                五个维度制作<br>
-                2017新三板金牌董秘TOP1000榜单</li>
+                在榜单评选基础上，将产生<br>
+                “最佳推荐挂牌券商奖”、“最佳督导券商奖”、“最佳做市商奖”<br>
+                以及“最佳券商奖”各十名<br>
+                于11月30日「2018中国新三板年度盛典暨第二届点金奖颁奖典礼」<br>
+                现场颁奖<br>
             <li>
-                并将在2017首届中国新三板年度盛典暨点金奖颁奖仪式上<br>
-                为其中的前十名授予<br>
-                2017点金奖新三板金牌董秘</li>
-            <li>
-                你的这一票，将决定参选董秘的<br>
-                “外界评价”得分<br>
-                每个微信账号只有5票<br>
-                给每一位董秘最多只能投1票<br>
-                是时候<br>
-                投出你的这一票了！</li>
         </ul>
+        <img src="/images/text.png" width="100%">
     </div>
     <div class="text">
         <h3>投票须知：</h3>
-        <p>1、2017新三板金牌董秘TOP1000榜单中的TOP10将获得点金奖2017新三板金牌董秘称号，并将在2017首届中国新三板年度盛典暨点金奖颁奖仪式领奖。<br>
-            2、以1亿数据为基础，点金奖将客观评选新三板市场中的董秘、挂牌公司、券商机构、投资机构以及其他中介机构，具体榜单和奖项如上。<br>
-            3、在法律许可范围内，本活动最终解释权归读懂新三板所有。</p>
+        <p>
+            {!! htmlspecialchars_decode($data['theme_desc']) !!}
+        </p>
     </div>
 </div>
 </body>
 <script src="{{ asset('/js/fastclick.js') }}"></script>
 <script>
+    layui.use('layer', function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var token ='{{ csrf_token() }}';
+        //FastClick.attach(document.body);
+        //投票
+        $('.list').on('click','.vote-btn',function(){
+            var cid = '{{ $id }}';
+            var pid = $(this).data('pid');
+            $.post('/v2',{'pid':pid,'cid':cid,'_token':token},function(data){
+                if(data.code ==1){
+                    var text = $('#'+cid+'box').text();
+                    $('#'+pid+'box').text(Number(text)+Number(1));
+                }
+                layer.msg(data.message);
+            });
+
+        });
+    })
 </script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var url = location.href.split('#').toString();
+        $.ajax({
+            type : "get",
+            url : "/getconfig",
+            dataType : "json",
+            data:{url:url},
+            async : false,
+            success : function(data) {
+                wx.config({
+                    debug: false,
+                    appId: data.appId,
+                    timestamp: data.timestamp,
+                    nonceStr: data.nonceStr,
+                    signature: data.signature,
+                    jsApiList: [
+                        'checkJsApi',
+                        'onMenuShareTimeline',
+                        'onMenuShareAppMessage'
+                    ]
+                });
+            },
+            error: function(xhr, status, error) {
+                //alert(status);
+                //alert(xhr.responseText);
+            }
+        });
+        wx.ready(function () {
+            var link = window.location.href;
+            var protocol = window.location.protocol;
+            var host = window.location.host;
+            var thumb ="http://vote.dudong.com/images/share.png";
+            wx.onMenuShareTimeline({
+                title: '{{ $data['company']['c_name'] }}正在参加2018点金奖·券商综合实力TOP20线上评选',
+                link: link,
+                imgUrl: thumb,
+                success: function () {
+                },
+                cancel: function () {
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '{{ $data['company']['c_name'] }}正在参加2018点金奖·券商综合实力TOP20线上评选',
+                desc: '请为我们投票！',
+                link: link,
+                imgUrl: thumb,
+                type: 'link',
+                dataUrl: '',
+                success: function () {
+                },
+                cancel: function () {
+                }
+            });
+        });
+
+    });
+</script>
+<div style="display: none;">
+    <script src="https://s13.cnzz.com/z_stat.php?id=1274993675&web_id=1274993675" language="JavaScript"></script>
+</div>
 </html>

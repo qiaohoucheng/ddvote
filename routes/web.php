@@ -13,7 +13,7 @@
 //->middleware('checkweixin')
 Route::get('/', 'IndexController@index')->middleware('checkweixin');
 Route::resource('/v1','IndexController')->middleware('checkweixin');
-Route::resource('/v2','CompanyController');
+Route::resource('/v2','CompanyController')->middleware('checkweixin');
 Route::resource('/v5','IndexController')->middleware('checkweixin');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function() {

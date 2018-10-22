@@ -4,8 +4,9 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Cvote extends Model
 {
-    protected $table = 'company';
+    //
+    protected $table = 'cvote_log';
     public $timestamps = false;
 }

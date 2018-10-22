@@ -52,8 +52,8 @@ class CompanyController extends Controller
     {
         $page  = $request->input('page') ? $request->input('page') : 1;
         $limit = $request->input('limit')? $request->input('limit') : 20;
-        $field = $request->input('field')? $request->input('field') :'vote';
-        $order = $request->input('order')? $request->input('order') :'desc';
+        $field = $request->input('field')? $request->input('field') :'sort';
+        $order = $request->input('order')? $request->input('order') :'asc';
         $keyword = $request->input('keyword')? $request->input('keyword') :'';
         $start = ($page-1) * $limit;
         //判断是否有关键字

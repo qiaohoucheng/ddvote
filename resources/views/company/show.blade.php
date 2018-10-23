@@ -287,7 +287,7 @@
             var pid = $(this).data('pid');
             $.post('/v2',{'pid':pid,'cid':cid,'_token':token},function(data){
                 if(data.code ==1){
-                    var text = $('#'+cid+'box').text();
+                    var text = $('#'+pid+'box').text();
                     $('#'+pid+'box').text(Number(text)+Number(1));
                 }
                 layer.msg(data.message);

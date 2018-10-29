@@ -232,7 +232,7 @@
                     layui.each(res.data, function(index, item){
                         lis.push(
                         '<li class="bar-tab">'+
-                            '<div class="tab-item ellipsis">'+item.c_name+'</div>'+
+                            '<div class="tab-item ellipsis">'+item.c_name+'<span style="float:right;"> '+item.vote+'票</span></div>'+
                             '<a href="javascript:;" class="tab-item vote-btn" data-id="'+item.id+'"></a>'+
                             '</li>'
                         )

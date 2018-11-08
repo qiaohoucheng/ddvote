@@ -16,9 +16,9 @@ class IndexController extends Controller
         //}
         Redis::set('name', 'Taylor');
     }
-    public function set(Request $request)
+    public function set($name)
     {
-        $name = $request->input('name','sui');
+        isset($name) ? $name : 'sui';
         Redis::set('name', $name);
     }
     public function get()

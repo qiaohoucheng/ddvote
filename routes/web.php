@@ -33,3 +33,9 @@ Route::get('auth/weixin/callback', 'WechatController@handleProviderCallback');
 //file
 Route::post('/file/uploadPicture', 'FileController@uploadPicture');
 Route::post('/file/adminUpload', 'FileController@adminUpload');
+
+Route::group(['namespace'=>'Home'], function () {
+    Route::get('/seed', 'IndexController@index'); //概览
+    Route::get('/redis/set/{name}', 'IndexController@set');
+    Route::get('/redis/get', 'IndexController@get');
+});

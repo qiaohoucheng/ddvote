@@ -11,6 +11,7 @@
         "laravel/socialite": "v3.0.9",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "~2.1.0",
+        "predis/predis": "^1.1",
         "socialiteproviders/manager": "v3.3.1",
         "socialiteproviders/weixin": "v4.0.2"
     },

@@ -27,7 +27,7 @@
         #app {
             background-color: #000103;
             min-height: 100%;
-            background-image: url(/images/dongmi-bg.png);
+            background-image: url(/images/quanshang-bg.png);
             background-repeat: no-repeat;
             background-size: 100% auto;
         }
@@ -111,6 +111,8 @@
             background-color: transparent;
             color: transparent;
         }
+
+
         .search .search-btn:active {
             background-color: transparent;
             color: transparent;
@@ -118,83 +120,57 @@
         ::-webkit-input-placeholder {
             color: rgba(255,255,255,.5);
         }
+        .list-middle {
+            padding: 0.533rem;
+            text-align: center;
+            position: relative;
+        }
+        .list-middle>div {
+            font-size: 0.426rem;
+            color: #F0CA79;
+        }
+        .list-middle>div:before {
+            content: '';
+            position: absolute;
+            height: 1px;
+            background-color: #F0CA79;
+            top: 49.9%;
+            left: 0.533rem;
+            right: 60%;
+        }
+        .list-middle>div:after {
+            content: '';
+            position: absolute;
+            height: 1px;
+            background-color: #F0CA79;
+            top: 49.9%;
+            right: 0.533rem;
+            left: 60%;
+        }
         .list {
             padding: 0.533rem;
             padding-top: 0;
             padding-bottom: 1px;
         }
         .list li {
-            display: block;
-            width: 4.266rem;
-            border-radius: 0.16rem;
-            background-color: #141E3C;
-            overflow: hidden;
+            /*display: block;*/
             margin-bottom: 0.4rem;
-        }
-        .list li:nth-child(2n) {
-            float: right;
-        }
-        .list li:nth-child(2n+1) {
-            float: left;
-        }
-        .list-top {
-            height: 2.4rem;
-            background-image: url(/images/default2.png);
+            background-image: url(/images/ic_vote2@2x.png);
             background-repeat: no-repeat;
-            background-size: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-        .list-top img {
-            width: 100%;
-            vertical-align: top;
-        }
-        .list-num {
-            position: absolute;
-            left: 0.266rem;
-            right: 0.266rem;
-            bottom: 0.16rem;
-            text-align: right;
-            font-size: 0.32rem;
-            color: #F0CA79;
-            -webkit-text-shadow: 0 0 4px rgba(0,0,0,0.50);
-            text-shadow: 0 0 4px rgba(0,0,0,0.50);
-        }
-        .list-bot {
-            height: 1.6rem;
-            background-color: #141E3C;
-        }
-        .list-bot .vote-btn {
-            padding-right: 0.266rem;
-            width: 1.706rem;
-        }
-        .vote-btn span{
-            display: block;
-            margin-left: auto;
-            width: 1.44rem;
-            height: 0.8rem;
-            background-image: url(/images/ic_vote@2x.png);
-            background-repeat: no-repeat;
+            height: 0.96rem;
+            line-height: 0.96rem;
             background-size: 100% 100%;
         }
-        .list-bot .list-tit {
-            color: #fff;
-            font-size: 0.426rem;
-            width: 100%;
-            padding-left: 0.32rem;
+        .list li div:first-child {
             text-align: left;
+            width: 6.693rem;
+            color: #F0CA79;
+            font-size: 0.373rem;
+            padding: 0 0.533rem;
         }
-        .list-tit span {
-            font-size: 0.32rem;
-            color: #fff;
-            opacity: 0.5;
-            display: block;
-            vertical-align: middle;
+        .list li.bar-tab a {
+            width: 100%;
         }
-        .layui-flow-more{
-            clear:both;
-        }
-
     </style>
     <script>
         var mql = window.matchMedia("(orientation: portrait)");
@@ -207,22 +183,22 @@
     </script>
 </head>
 <body>
-{{--<div class="nav bar-tab">--}}
-    {{--<a href="" class="tab-item"></a>--}}
-    {{--<a href="" class="tab-item"></a>--}}
-{{--</div>--}}
 <div id="app">
     <div class="search-box">
-        <form action="/v1" method="get" id="search-form">
+        <form action="/v2" method="get" id="search-form">
         <div class="search bar-tab">
-            <input type="search" value="{{ $keyword }}" class="search-input tab-item" name="keyword" placeholder="请输入姓名或公司代码搜索参投董秘嘉宾">
+            <input type="search" name="keyword"  value="{{ $keyword }}"  class="search-input tab-item" placeholder="请输入证券公司简称搜索">
             <a href="javascript:;" class="search-btn tab-item"></a>
         </div>
         </form>
     </div>
+    <div class="list-middle">
+        <div>排行榜</div>
+    </div>
     <ul class="clear list" id="dd-content">
     </ul>
 </div>
+</body>
 <script src="{{ asset('/js/fastclick.js') }}"></script>
 <script>
     layui.use('layer', function(){
@@ -234,15 +210,11 @@
             $('#search-form').submit();
         })
         //投票
-            $('.list').on('click','.vote-btn',function(){
-            var option_id = $(this).data('optionid');
-            $.post('/v1',{'option_id':option_id,'_token':token},function(data){
-                if(data.code ==1){
-                    var text = $('.li_'+option_id).find('.dd-num').text();
-                    $('.li_'+option_id).find('.dd-num').text(Number(text)+Number(1));
-                }
-                layer.msg(data.message);
-            });
+        $('.list').on('click','.vote-btn',function(){
+            var cid = $(this).data('id');
+            if(cid >0){
+                window.location.href='/v2/'+cid;
+            }
         });
     });
     layui.use('flow', function(){
@@ -255,26 +227,14 @@
             ,done: function(page, next){
                 console.log(page);
                 var lis = [];
-                $.get('/v1',{'page':page,'keyword':keyword}, function(res){
+                $.get('/v2',{'page':page,'keyword':keyword}, function(res){
                     //假设你的列表返回在data集合中
                     layui.each(res.data, function(index, item){
                         lis.push(
-                        '<li class="li_'+item.id+'">'+
-                            '<a href=/v1/'+item.id+'>'+
-                            '<div class="list-top">'+
-                            '<img lay-src="'+item.option_img+'">'+
-                            '<div class="list-num"><span class="dd-num">'+item.option_vote+'</span>票</div>'+
-                            '</div>'+
-                            '</a>'+
-                        '<div class="list-bot bar-tab">'+
-                            '<a href=/v1/'+item.id+' class="list-tit tab-item">'+
-                            '<label>'+item.option_name+'<span class="ellipsis">'+item.option_company+'</span></label>'+
-                            '</a>'+
-                        '<a href="javascript:;" data-optionid="'+item.id+'" class="tab-item vote-btn">'+
-                            '<span></span>'+
-                            '</a>'+
-                            '</div>'+
-                        '</li>'
+                        '<li class="bar-tab">'+
+                            '<div class="tab-item ellipsis">'+item.c_name+'<span style="float:right;"> '+item.vote+'票</span></div>'+
+                            '<a href="javascript:;" class="tab-item vote-btn" data-id="'+item.id+'"></a>'+
+                            '</li>'
                         )
                     });
                     next(lis.join(''), page < res.pages);
@@ -329,7 +289,7 @@
             });
             wx.onMenuShareAppMessage({
                 title: '{{ $data->theme_name }}',
-                desc: '让努力，被看见！投出你的一票，为10000+新三板董秘加油！',
+                desc: '2018年，谁是券商中的佼佼者？ 投出您的一票，为中国新三板券商业务主体加油！',
                 link: link,
                 imgUrl: thumb,
                 type: 'link',
@@ -344,7 +304,6 @@
     });
 </script>
 <div style="display: none;">
-<script src="https://s13.cnzz.com/z_stat.php?id=1274993675&web_id=1274993675" language="JavaScript"></script>
+    <script src="https://s19.cnzz.com/z_stat.php?id=1275138459&web_id=1275138459" language="JavaScript"></script>
 </div>
-</body>
 </html>

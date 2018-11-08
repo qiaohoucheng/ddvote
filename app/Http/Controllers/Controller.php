@@ -11,6 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected  $f;
     public function adminFormat($model,$request)
     {
         //初始化
@@ -51,7 +52,7 @@ class Controller extends BaseController
         //初始化
         $page  = $request->input('page') ? $request->input('page') : 1;
         $limit = $request->input('limit')? $request->input('limit') : 20;
-        $field = $request->input('field')? $request->input('field') :'option_vote';
+        $field = $request->input('field')? $request->input('field') :'use_photo';
         $order = $request->input('order')? $request->input('order') :'desc';
         $keyword = $request->input('keyword')? $request->input('keyword') :'';
         $start = ($page-1) * $limit;
@@ -66,7 +67,25 @@ class Controller extends BaseController
                 ->orwhere('option_name','like','%'.$keyword.'%')
                 ->count();
         }else{
-            $data  = $model::offset($start)->limit($limit)->orderBy($field,$order)->get()->toArray();
+            $data  = $model::whereBetween('option_vote', [1000, 3000])
+                ->offset($start)->limit($limit)
+                ->orderBy($field,$order)->get()->toArray();
+            if(count($data) < 10 ){
+                $wcount = $model::whereBetween('option_vote', [1000, 3000])->count();
+                $stop = ceil($wcount/20);
+                if($stop == $page){
+                    $this->f = count($data);
+                    $start =  ($page-$stop) * $limit;
+                    $limit = ceil($limit-$this->f);
+                }else{
+                    $start = ($page-$stop ) * $limit - $this->f;
+                }
+                $start <= 0 ? 0 : $start;
+                $data2 = $model::whereNotBetween('option_vote', [1000, 3000])
+                ->offset($start)->limit($limit)
+                ->orderBy($field,$order)->get()->toArray();
+                $data = array_merge($data,$data2);
+            }
             $count = $model::count();
         }
         $pages = ceil($count/$limit);
@@ -77,7 +96,7 @@ class Controller extends BaseController
             'count'=>$count,
             'msg'=>'查询成功',
             'data'=>$data,
-            'pages'=>$pages,
+            'pages'=>$pages
         );
         return $return;
     }

@@ -402,7 +402,7 @@
                 必须是<br>
                 资本市场信息披露规则坚定的捍卫者<br>资本运作的顶级高手<br>
                 市值管理的大师级人物<br>
-                挂牌公司监事坚实前行的杰出贡献者<br>并且<br>
+                挂牌公司坚实前行的杰出贡献者<br>并且<br>
                 为全市场广泛认同 声誉卓著</li>
             <li>挖掘 100 万+数据<br>
                 「读懂新三板」从信息披露、<br>资本运作、<br>
@@ -437,7 +437,6 @@
         <a href="javascript:;" class="pop-btn"></a>
     </div>
 </form>
-</body>
 <div id="share" style="display:none;">
     <img src="/images/share-icon.png" class="share-icon">
 </div>
@@ -581,4 +580,8 @@
 
     });
 </script>
+<div style="display: none;">
+    <script src="https://s13.cnzz.com/z_stat.php?id=1274993675&web_id=1274993675" language="JavaScript"></script>
+</div>
+</body>
 </html>

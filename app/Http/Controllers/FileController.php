@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Audit;
 use Illuminate\Http\Request;
 use App\Model\File;
 
@@ -36,5 +37,27 @@ class FileController extends Controller
             //5.返回图片信息
         }
         abort('404');
+    }
+    public function adminUpload(Request $request)
+    {
+        $data = $this->uploadPicture($request);
+        if($data['code'] ==1){
+            $audit = new Audit();
+            $audit->option_id = $request->input('option_id');
+            $audit->name = 'DD';
+            $audit->mobile = '00000000000';
+            $audit->member_id = '0';
+            $audit->photo =$data['data']['pic_id'];
+            $audit->created_at = time();
+            $res = $audit->save();
+            if($res){
+                $audit->url =$data['data']['url'];
+                return $this->qhc(1,'上传成功',$audit);
+            }else{
+                return $this->qhc(0,'上传失败');
+            }
+        }else{
+            return $data;
+        }
     }
 }

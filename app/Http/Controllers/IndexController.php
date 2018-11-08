@@ -56,7 +56,7 @@ class IndexController extends Controller
         $theme = Theme::find($vid);
         $now_time = strtotime(Carbon::now());
         if( $now_time - $theme->end_time > 0 ){
-            $this->qhc('40001','投票已截止');
+         return    $this->qhc('40001','投票已截止');
         }
         $today  = strtotime(Carbon::today());
         $tomorrow = strtotime(Carbon::tomorrow());
